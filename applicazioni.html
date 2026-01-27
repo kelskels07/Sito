@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicazioni P2P | Guida ai Casi d'Uso Reali</title>
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --secondary-green: #27ae60;
+            --dark-blue: #2c3e50;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --text-main: #444;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            line-height: 1.8; 
+            margin: 0; 
+            background-color: var(--light-bg); 
+            color: var(--text-main); 
+        }
+        
+        /* Navigazione (Coerente con le altre pagine) */
+        nav { 
+            background: var(--dark-blue); 
+            padding: 1.2rem; 
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            margin: 0 15px; 
+            font-weight: 500; 
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover { background: var(--primary-green); color: var(--dark-blue); }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-blue), #34495e);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 { margin: 0; font-size: 2.5rem; }
+        .hero p { opacity: 0.9; font-size: 1.1rem; max-width: 700px; margin: 10px auto; }
+
+        /* Contenitore */
+        .container { 
+            max-width: 1100px; 
+            margin: -40px auto 40px; 
+            background: var(--white); 
+            padding: 50px; 
+            border-radius: 15px; 
+            box-shadow: var(--shadow); 
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Griglia Applicazioni */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .app-card {
+            border: 1px solid #f0f0f0;
+            padding: 30px;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--primary-green);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e8f5e9;
+            color: var(--secondary-green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        .app-card h3 {
+            margin: 0 0 15px 0;
+            color: var(--dark-blue);
+            font-size: 1.4rem;
+        }
+
+        .app-card p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .examples {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--primary-green);
+        }
+
+        .examples strong { color: var(--dark-blue); }
+
+        /* Sezione Focus */
+        .deep-dive {
+            margin-top: 60px;
+            padding: 40px;
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            border-radius: 12px;
+        }
+
+        .deep-dive h2 { color: var(--dark-blue); margin-top: 0; }
+
+        footer { text-align: center; padding: 40px; color: #7f8c8d; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .container { padding: 25px; margin-top: 0; border-radius: 0; }
+            .app-grid { grid-template-columns: 1fr; }
+        }
+		
+		/* Logo nella nav */
+nav a.logo {
+    margin-right: 40px; /* spazio tra logo e link */
+}
+
+nav a.logo img {
+    height: 60px; /* altezza del logo più grande */
+    width: auto;
+    vertical-align: middle;
+}
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">
+        <img src="logo.png" alt="Logo Peer-to-Peer">
+    </a>
+    <a href="cos-e-p2p.html">Cos'è il P2P</a>
+    <a href="applicazioni.html">Applicazioni</a>
+    <a href="pro-contro.html">Pro e Contro</a>
+    <a href="storia.html">Storia</a>
+    <a href="glossario.html">Glossario</a>
+</nav>
+
+
+<header class="hero">
+    <h1>Applicazioni P2P nel Mondo Reale</h1>
+    <p>Dallo scambio di file alla rivoluzione finanziaria: come la decentralizzazione sta cambiando il web.</p>
+</header>
+
+<div class="container">
+    <p class="intro-text">
+        Il modello Peer-to-Peer non è una tecnologia di nicchia del passato. Al contrario, è l'ossatura di alcune delle innovazioni più critiche della nostra era digitale. Rimuovendo l'intermediario centrale, queste applicazioni offrono efficienza, velocità e una resistenza alla censura senza precedenti.
+    </p>
+
+    <div class="app-grid">
+        <div class="app-card">
+            <span class="tag">Distribuzione Dati</span>
+            <h3>📂 File Sharing & Content Delivery</h3>
+            <p>È l'applicazione classica. Invece di scaricare un file da un unico server (che potrebbe sovraccaricarsi), il file viene diviso in piccoli frammenti scambiati tra migliaia di utenti. Questo riduce i costi di banda per le aziende e aumenta la velocità per l'utente finale.</p>
+            <div class="examples">
+                <strong>Esempi:</strong> BitTorrent, Windows Update Delivery Optimization, Blizzard Downloader (per giochi come WoW).
+            </div>
+        </div>
+
+        <div class="app-card">
+            <span class="tag">Finanza & Trust</span>
+            <h3>💰 Blockchain e Criptovalute</h3>
+            <p>Senza il P2P, le criptovalute non esisterebbero. La rete è composta da migliaia di "nodi" che conservano una copia del libro mastro (ledger). Ogni transazione viene verificata dai pari senza bisogno di una banca centrale.</p>
+            <div class="examples">
+                <strong>Esempi:</strong> Bitcoin (pagamenti), Ethereum (Smart Contracts), Monero (Privacy).
+            </div>
+        </div>
+
+        <div class="app-card">
+            <span class="tag">Ricerca Scientifica</span>
+            <h3>🧠 Grid Computing (Calcolo Distribuito)</h3>
+            <p>Il P2P permette di unire la potenza di calcolo di milioni di computer domestici per risolvere problemi complessi, come la ricerca di cure per malattie o l'analisi di segnali dallo spazio, superando la potenza dei singoli supercomputer.</p>
+            <div class="examples">
+                <strong>Esempi:</strong> Folding@home (studio proteine), BOINC, SETI@home.
+            </div>
+        </div>
+
+        <div class="app-card">
+            <span class="tag">Web 3.0</span>
+            <h3>🌐 Web Decentralizzato (IPFS)</h3>
+            <p>L'InterPlanetary File System (IPFS) mira a sostituire l'HTTP. Invece di cercare un file tramite il suo indirizzo (server), lo cerca per il suo contenuto. I siti web diventano impossibili da abbattere finché qualcuno nel mondo ne ospita una copia.</p>
+            <div class="examples">
+                <strong>Esempi:</strong> IPFS, Brave Browser (supporto nativo), dTube.
+            </div>
+        </div>
+
+        <div class="app-card">
+            <span class="tag">Privacy</span>
+            <h3>📞 Comunicazione Criptata</h3>
+            <p>Nelle app di messaggistica P2P, i messaggi non transitano (o non vengono memorizzati) su un server centrale aziendale. Questo minimizza il rischio di intercettazioni di massa e garantisce che la comunicazione sia veramente privata.</p>
+            <div class="examples">
+                <strong>Esempi:</strong> Signal (alcune funzioni), Tox, Briar (messaggistica offline/mesh).
+            </div>
+        </div>
+
+        <div class="app-card">
+            <span class="tag">Media</span>
+            <h3>📺 P2P Streaming & IPTV</h3>
+            <p>Durante grandi eventi in diretta, milioni di persone si connettono contemporaneamente. Lo streaming P2P permette a ogni spettatore di ri-trasmettere piccoli segmenti del video agli altri spettatori vicini, evitando il crash dei server centrali.</p>
+            <div class="examples">
+                <strong>Esempi:</strong> SopCast, Peertube, protocolli WebRTC per live streaming.
+            </div>
+        </div>
+    </div>
+
+    <div class="deep-dive">
+        <h2>Perché le aziende usano il P2P?</h2>
+        <p>Potrebbe sembrare controintuitivo, ma giganti come <strong>Microsoft, Facebook e Amazon</strong> usano tecnologie P2P internamente. Il motivo è puramente economico: distribuire un aggiornamento di Windows a 1 miliardo di PC costerebbe cifre astronomiche in banda larga. Usando i PC degli utenti come "mini-server" per inviare pezzi di aggiornamento ai vicini di rete, Microsoft riduce il carico sui propri server di oltre il 70%.</p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Guida alle Tecnologie P2P - Approfondimento Tecnico</p>
+	<p>Creato per scopi didattici da Khalid e Stefano.</p>
+</footer>
+
+</body>
+</html>

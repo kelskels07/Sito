@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storia del P2P | Evoluzione e Rivoluzioni Digitali</title>
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --secondary-green: #27ae60;
+            --dark-blue: #2c3e50;
+            --accent-blue: #3498db;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --text-main: #444;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            line-height: 1.8; 
+            margin: 0; 
+            background-color: var(--light-bg); 
+            color: var(--text-main); 
+        }
+        
+        /* Navigazione Coerente */
+        nav { 
+            background: var(--dark-blue); 
+            padding: 1.2rem; 
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            margin: 0 15px; 
+            font-weight: 500; 
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover { background: var(--primary-green); color: var(--dark-blue); }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-blue), #34495e);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 { margin: 0; font-size: 2.5rem; }
+        .hero p { opacity: 0.9; font-size: 1.1rem; max-width: 800px; margin: 10px auto; }
+
+        /* Contenitore */
+        .container { 
+            max-width: 1000px; 
+            margin: -40px auto 40px; 
+            background: var(--white); 
+            padding: 50px; 
+            border-radius: 15px; 
+            box-shadow: var(--shadow); 
+        }
+
+        /* Design Timeline Avanzato */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 31px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent-blue), var(--primary-green));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            padding-left: 80px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 4px solid var(--accent-blue);
+            border-radius: 50%;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover::after {
+            background: var(--primary-green);
+            transform: scale(1.3);
+        }
+
+        .year-tag {
+            display: inline-block;
+            background: var(--dark-blue);
+            color: white;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .content-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            transition: transform 0.3s ease;
+        }
+
+        .content-box:hover {
+            transform: translateX(10px);
+            border-color: var(--accent-blue);
+        }
+
+        .content-box h3 {
+            margin-top: 0;
+            color: var(--dark-blue);
+            font-size: 1.5rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .tech-badge {
+            font-size: 0.75rem;
+            background: #e1f5fe;
+            color: #0288d1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer { text-align: center; padding: 40px; color: #7f8c8d; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .container { padding: 25px; margin-top: 0; border-radius: 0; }
+            .timeline::before { left: 21px; }
+            .timeline-item { padding-left: 50px; }
+            .timeline-item::after { left: 10px; }
+        }
+		
+		/* Logo nella nav */
+nav a.logo {
+    margin-right: 40px; /* spazio tra logo e link */
+}
+
+nav a.logo img {
+    height: 60px; /* altezza del logo più grande */
+    width: auto;
+    vertical-align: middle;
+}
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">
+        <img src="logo.png" alt="Logo Peer-to-Peer">
+    </a>
+    <a href="cos-e-p2p.html">Cos'è il P2P</a>
+    <a href="applicazioni.html">Applicazioni</a>
+    <a href="pro-contro.html">Pro e Contro</a>
+    <a href="storia.html">Storia</a>
+    <a href="glossario.html">Glossario</a>
+</nav>
+
+
+<header class="hero">
+    <h1>Cronologia del Peer-to-Peer</h1>
+    <p>Dalla nascita di Napster alla rivoluzione della Blockchain: vent'anni di decentralizzazione.</p>
+</header>
+
+<div class="container">
+    
+    <div class="timeline">
+        
+        <div class="timeline-item">
+            <span class="year-tag">1999 - Il Big Bang</span>
+            <div class="content-box">
+                <h3>1. Architettura Ibrida (L'era Napster)</h3>
+                <p>
+                    Creato da Shawn Fanning, <strong>Napster</strong> ha scioccato l'industria musicale. Utilizzava un modello ibrido: un server centrale manteneva un indice di tutti i file, ma il trasferimento avveniva tra utenti. 
+                </p>
+                <p>
+                    <span class="tech-badge">Punto debole:</span> Il server centrale era un "Single Point of Failure". Quando la magistratura ordinò la chiusura dei server dell'indice, l'intera rete morì istantaneamente.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <span class="year-tag">2000-2002 - La Reazione</span>
+            <div class="content-box">
+                <h3>2. P2P Puro e Decentralizzato</h3>
+                <p>
+                    Per evitare la chiusura legale, nacquero protocolli come <strong>Gnutella</strong>. Non esisteva più alcun server centrale: le ricerche venivano "inondate" (flooding) tra i vicini di rete.
+                </p>
+                <p>
+                    <span class="tech-badge">Innovazione:</span> Impossibile da spegnere. <br>
+                    <span class="tech-badge">Punto debole:</span> Enorme traffico di rete generato solo per le ricerche, rendendo il sistema lento e poco scalabile.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <span class="year-tag">2003-2005 - L'Era dei Supernodi</span>
+            <div class="content-box">
+                <h3>3. Evoluzione Gerarchica (Kazaa & Skype)</h3>
+                <p>
+                    Software come <strong>Kazaa</strong> e la prima versione di <strong>Skype</strong> introdussero i "Supernodi". I computer con connessioni più veloci diventavano automaticamente dei mini-hub per gestire il traffico degli utenti più lenti.
+                </p>
+                <p>
+                    Questa fase ha permesso al P2P di diventare di massa, gestendo milioni di utenti contemporaneamente con una velocità di ricerca senza precedenti.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <span class="year-tag">2006-2010 - L'Efficienza Matematica</span>
+            <div class="content-box">
+                <h3>4. BitTorrent e le DHT</h3>
+                <p>
+                    <strong>Bram Cohen</strong> rivoluzionò tutto con BitTorrent. Invece di scaricare un file alla volta, il file viene diviso in centinaia di pezzi scaricati in parallelo. 
+                </p>
+                <p>
+                    L'introduzione delle <strong>DHT (Distributed Hash Tables)</strong> permise di trovare i file senza server né supernodi, usando algoritmi matematici distribuiti su ogni client. È il P2P moderno per eccellenza.
+                </p>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <span class="year-tag">2008-Oggi - Oltre i File</span>
+            <div class="content-box">
+                <h3>5. Blockchain e Web Decentralizzato</h3>
+                <p>
+                    Satoshi Nakamoto applica i principi P2P al denaro con <strong>Bitcoin</strong>. Non si scambiano più solo file, ma "valore" e "consenso". 
+                </p>
+                <p>
+                    Oggi tecnologie come <strong>IPFS</strong> (InterPlanetary File System) puntano a creare un web interamente P2P dove i siti non risiedono su server aziendali, ma sulla rete collettiva degli utenti.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <section style="background: #fdfdfd; padding: 30px; border-radius: 12px; margin-top: 20px; border: 1px dashed #ccc;">
+        <h2 style="color: var(--dark-blue); margin-top: 0;">In sintesi</h2>
+        <p>La storia del P2P è una fuga costante verso la decentralizzazione totale. Ogni volta che un centro di controllo veniva identificato e rimosso, la tecnologia rispondeva diventando più distribuita, più robusta e più efficiente, passando da semplice strumento di "scambio file" a base portante dell'economia digitale moderna.</p>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2026 Guida alle Tecnologie P2P - Documentazione Storica</p>
+	<p>Creato per scopi didattici da Khalid e Stefano.</p>
+</footer>
+
+</body>
+</html>

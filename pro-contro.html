@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro e Contro | Analisi Tecnica dell'Architettura P2P</title>
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --secondary-green: #27ae60;
+            --danger-red: #e74c3c;
+            --dark-blue: #2c3e50;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --text-main: #444;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            line-height: 1.8; 
+            margin: 0; 
+            background-color: var(--light-bg); 
+            color: var(--text-main); 
+        }
+        
+        /* Navigazione Coerente */
+        nav { 
+            background: var(--dark-blue); 
+            padding: 1.2rem; 
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            margin: 0 15px; 
+            font-weight: 500; 
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover { background: var(--primary-green); color: var(--dark-blue); }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-blue), #34495e);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 { margin: 0; font-size: 2.5rem; }
+        .hero p { opacity: 0.9; font-size: 1.1rem; max-width: 800px; margin: 10px auto; }
+
+        /* Contenitore */
+        .container { 
+            max-width: 1100px; 
+            margin: -40px auto 40px; 
+            background: var(--white); 
+            padding: 50px; 
+            border-radius: 15px; 
+            box-shadow: var(--shadow); 
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* Grid Layout */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .analysis-card {
+            padding: 40px;
+            border-radius: 15px;
+            height: 100%;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .analysis-card:hover {
+            transform: scale(1.02);
+        }
+
+        .pros-card {
+            background-color: #f0fff4;
+            border: 1px solid #dcfce7;
+        }
+
+        .cons-card {
+            background-color: #fff5f5;
+            border: 1px solid #fee2e2;
+        }
+
+        .analysis-card h2 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+        }
+
+        .pros-card h2 { color: var(--secondary-green); }
+        .cons-card h2 { color: var(--danger-red); }
+
+        /* List Styling */
+        .analysis-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .analysis-list li {
+            margin-bottom: 25px;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .analysis-list li::before {
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .pros-card li::before { content: "✓"; color: var(--primary-green); }
+        .cons-card li::before { content: "✕"; color: var(--danger-red); }
+
+        .analysis-list strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark-blue);
+        }
+
+        .analysis-list p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Summary Box */
+        .verdict {
+            margin-top: 60px;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 6px solid var(--dark-blue);
+        }
+
+        .verdict h3 { margin-top: 0; color: var(--dark-blue); }
+
+        footer { text-align: center; padding: 40px; color: #7f8c8d; font-size: 0.9rem; }
+
+        @media (max-width: 900px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+            .container { padding: 30px; }
+        }
+		
+		/* Logo nella nav */
+nav a.logo {
+    margin-right: 40px; /* spazio tra logo e link */
+}
+
+nav a.logo img {
+    height: 60px; /* altezza del logo più grande */
+    width: auto;
+    vertical-align: middle;
+}
+
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">
+        <img src="logo.png" alt="Logo Peer-to-Peer">
+    </a>
+    <a href="cos-e-p2p.html">Cos'è il P2P</a>
+    <a href="applicazioni.html">Applicazioni</a>
+    <a href="pro-contro.html">Pro e Contro</a>
+    <a href="storia.html">Storia</a>
+    <a href="glossario.html">Glossario</a>
+</nav>
+
+
+<header class="hero">
+    <h1>Analisi Critica del P2P</h1>
+    <p>Valutazione tecnica dei vantaggi strategici e delle sfide strutturali delle reti decentralizzate.</p>
+</header>
+
+<div class="container">
+    <div class="intro-section">
+        <p>L'adozione di un'architettura Peer-to-Peer non è mai una scelta banale. Se da un lato offre una libertà e una potenza di calcolo senza pari, dall'altro introduce complessità gestionali che il modello centralizzato risolve nativamente. Ecco il bilancio tecnico.</p>
+    </div>
+
+    <div class="comparison-grid">
+        <div class="analysis-card pros-card">
+            <h2>Vantaggi</h2>
+            <ul class="analysis-list">
+                <li>
+                    <strong>Scalabilità Organica</strong>
+                    <p>In un sistema tradizionale, l'aggiunta di utenti appesantisce il server. Nel P2P, ogni nuovo utente porta con sé banda e spazio disco, rendendo la rete più performante all'aumentare della partecipazione.</p>
+                </li>
+                <li>
+                    <strong>Resistenza ai Guasti (Fault Tolerance)</strong>
+                    <p>Non esiste un "Single Point of Failure". La scomparsa di un nodo non compromette la disponibilità della risorsa, che rimane replicata su altri peer sparsi globalmente.</p>
+                </li>
+                <li>
+                    <strong>Efficienza nei Costi</strong>
+                    <p>Le organizzazioni possono distribuire enormi quantità di dati senza investire in infrastrutture server costose o CDN (Content Delivery Network), sfruttando le risorse già esistenti alla periferia della rete.</p>
+                </li>
+                <li>
+                    <strong>Resistenza alla Censura</strong>
+                    <p>Essendo i dati distribuiti e non centralizzati, è estremamente difficile per un'autorità singola bloccare o rimuovere un contenuto dalla rete, garantendo una maggiore libertà di informazione.</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="analysis-card cons-card">
+            <h2>Svantaggi</h2>
+            <ul class="analysis-list">
+                <li>
+                    <strong>Sicurezza e Integrità</strong>
+                    <p>È difficile verificare l'identità dei nodi. Malintenzionati possono immettere file corrotti o malware (pratica nota come <em>poisoning</em>) per compromettere la sicurezza degli altri partecipanti.</p>
+                </li>
+                <li>
+                    <strong>Consumo di Risorse Locali</strong>
+                    <p>A differenza dei sistemi client, il P2P richiede che l'utente offra la propria banda in upload. Questo può rallentare la connessione domestica e consumare energia e cicli di CPU in modo continuativo.</p>
+                </li>
+                <li>
+                    <strong>Problema della Disponibilità (Churn)</strong>
+                    <p>La rete dipende dalla generosità dei "Seeder". Se gli utenti scaricano e scollegono immediatamente (comportamento da <em>Leecher</em>), la disponibilità dei file rari crolla drasticamente.</p>
+                </li>
+                <li>
+                    <strong>Complessità di Ricerca</strong>
+                    <p>Trovare un file in una rete senza un indice centrale è tecnicamente complesso e richiede protocolli di routing sofisticati (come le tabelle DHT), che possono risultare più lenti di una query a un database centrale.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="verdict">
+        <h3>Il Verdetto Tecnico</h3>
+        <p>
+            Il modello P2P non sostituisce il Client-Server, ma lo integra. È la scelta d'elezione per la <strong>distribuzione di massa di dati statici</strong> e per sistemi dove la <strong>privacy e l'indipendenza</strong> sono prioritarie (come nelle criptovalute). Tuttavia, per servizi che richiedono transazioni in tempo reale garantite, alta sicurezza centralizzata e gestione degli utenti (come l'e-commerce o il banking), il modello tradizionale rimane superiore.
+        </p>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2026 Guida alle Tecnologie P2P - Analisi Tecnica e Strutturale</p>
+	<p>Creato per scopi didattici da Khalid e Stefano.</p>
+</footer>
+
+</body>
+</html>

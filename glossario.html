@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossario P2P | Dizionario Tecnico Completo</title>
+
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --secondary-green: #27ae60;
+            --dark-blue: #2c3e50;
+            --accent-blue: #3498db;
+            --light-bg: #f4f7f6;
+            --white: #ffffff;
+            --text-main: #444;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            line-height: 1.8; 
+            margin: 0; 
+            background-color: var(--light-bg); 
+            color: var(--text-main); 
+        }
+
+        /* NAV */
+        nav { 
+            background: var(--dark-blue); 
+            padding: 1.2rem; 
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        nav a { 
+            color: #fff; 
+            text-decoration: none; 
+            margin: 0 15px; 
+            font-weight: 500; 
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        
+        nav a:hover { background: var(--primary-green); color: var(--dark-blue); }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-blue), #34495e);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 { margin: 0; font-size: 2.5rem; }
+        .hero p { opacity: 0.9; font-size: 1.1rem; max-width: 800px; margin: 10px auto; }
+
+        /* CONTAINER */
+        .container { 
+            max-width: 1000px; 
+            margin: -40px auto 40px; 
+            background: var(--white); 
+            padding: 50px; 
+            border-radius: 15px; 
+            box-shadow: var(--shadow); 
+        }
+
+        /* SEARCH */
+        .search-box {
+            margin-bottom: 40px;
+            display: flex;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-box input:focus { border-color: var(--accent-blue); }
+
+        /* GLOSSARY */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .glossary-item {
+            padding: 30px;
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            border-left: 6px solid #ddd;
+            transition: 0.3s;
+        }
+
+        .glossary-item:hover {
+            border-left-color: var(--primary-green);
+            transform: translateX(8px);
+            box-shadow: var(--shadow);
+        }
+
+        .glossary-item dt {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .glossary-item dd {
+            margin: 0;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .meta {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 25px; margin-top: 0; border-radius: 0; }
+        }
+		
+		/* Logo nella nav */
+nav a.logo {
+    margin-right: 40px; /* spazio tra logo e link */
+}
+
+nav a.logo img {
+    height: 60px; /* altezza del logo più grande */
+    width: auto;
+    vertical-align: middle;
+}
+
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html" class="logo">
+        <img src="logo.png" alt="Logo Peer-to-Peer">
+    </a>
+    <a href="cos-e-p2p.html">Cos'è il P2P</a>
+    <a href="applicazioni.html">Applicazioni</a>
+    <a href="pro-contro.html">Pro e Contro</a>
+    <a href="storia.html">Storia</a>
+    <a href="glossario.html">Glossario</a>
+</nav>
+
+
+<header class="hero">
+    <h1>Glossario Tecnico P2P</h1>
+    <p>Terminologia essenziale per comprendere le reti peer-to-peer e il Web decentralizzato.</p>
+</header>
+
+<main class="container">
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Cerca un termine (es. DHT, Seeder, Churn...)">
+    </div>
+
+    <dl class="glossary-grid">
+
+        <div class="glossary-item">
+            <dt>🖥️ Peer (Nodo)</dt>
+            <dd>Ogni computer della rete che agisce sia come client che come server, senza gerarchia.</dd>
+            <span class="meta">Concetto Base</span>
+        </div>
+
+        <div class="glossary-item">
+            <dt>🔍 DHT (Distributed Hash Table)</dt>
+            <dd>Struttura dati distribuita che associa chiavi a valori senza server centrale.</dd>
+            <span class="meta">Protocollo</span>
+        </div>
+
+        <div class="glossary-item">
+            <dt>🌱 Seeder / Leecher</dt>
+            <dd>Il Seeder condivide il file completo; il Leecher lo sta ancora scaricando.</dd>
+            <span class="meta">Comportamento Utente</span>
+        </div>
+
+        <div class="glossary-item">
+            <dt>📡 Tracker</dt>
+            <dd>Server che aiuta i peer a scoprirsi all'interno di uno swarm.</dd>
+            <span class="meta">Infrastruttura</span>
+        </div>
+
+        <div class="glossary-item">
+            <dt>🧲 Magnet Link</dt>
+            <dd>Link basato sull’hash del contenuto invece che sulla sua posizione.</dd>
+            <span class="meta">Standard</span>
+        </div>
+
+        <div class="glossary-item">
+            <dt>🔄 Churn Rate</dt>
+            <dd>Frequenza con cui i peer entrano ed escono dalla rete.</dd>
+            <span class="meta">Dinamica di Rete</span>
+        </div>
+
+        <div class="glossary-item">
+            <dt>🐝 Swarm (Sciame)</dt>
+            <dd>Gruppo di peer che condividono lo stesso file nello stesso momento.</dd>
+            <span class="meta">Organizzazione</span>
+        </div>
+
+        <div class="glossary-item">
+            <dt>🌐 IPFS</dt>
+            <dd>Protocollo P2P per rendere il web distribuito, sicuro e resistente alla censura.</dd>
+            <span class="meta">Web3</span>
+        </div>
+
+    </dl>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Glossario Peer-to-Peer</p>
+	<p>Creato per scopi didattici da Khalid e Stefano.</p>
+</footer>
+
+<script>
+    const searchInput = document.getElementById("searchInput");
+    const glossaryItems = document.querySelectorAll(".glossary-item");
+
+    searchInput.addEventListener("keyup", () => {
+        const query = searchInput.value.toLowerCase();
+
+        glossaryItems.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            item.style.display = text.includes(query) ? "block" : "none";
+        });
+    });
+</script>
+
+</body>
+</html>
