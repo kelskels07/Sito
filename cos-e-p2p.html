@@ -4,112 +4,365 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cos'è il P2P | Guida Completa all'Architettura Peer-to-Peer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-green: #2ecc71;
             --secondary-green: #27ae60;
-            --dark-blue: #2c3e50;
-            --light-blue: #ecf0f1;
-            --text-main: #444;
+            --primary-gradient: linear-gradient(135deg, #2ecc71, #27ae60);
+            --dark-blue: #1a252f;
+            --light-blue: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --text-light: #718096;
             --white: #ffffff;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-green: 0 10px 30px rgba(46, 204, 113, 0.3);
         }
 
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body { 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             line-height: 1.8; 
-            margin: 0; 
-            background-color: #f4f7f6; 
-            color: var(--text-main); 
+            background-color: var(--light-blue); 
+            color: var(--text-main);
+            overflow-x: hidden;
         }
         
         /* Navigazione Moderna */
         nav { 
-            background: var(--dark-blue); 
-            padding: 1.2rem; 
+            background: rgba(26, 37, 47, 0.95);
+            padding: 1.2rem 2rem; 
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            padding: 0.8rem 2rem;
+            background: rgba(26, 37, 47, 0.98);
         }
         
         nav a { 
-            color: #fff; 
+            color: #e2e8f0; 
             text-decoration: none; 
             margin: 0 15px; 
-            font-weight: 500; 
+            font-weight: 600; 
             font-size: 0.9rem;
             transition: all 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 4px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
         }
         
         nav a:hover { 
-            background: var(--primary-green);
-            color: var(--dark-blue);
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--primary-green);
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 80%;
         }
         
-        /* Header con Gradiente */
-        .hero {
-            background: linear-gradient(135deg, var(--dark-blue), #34495e);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
+        .logo {
+            margin-right: 40px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
         }
 
-        .hero h1 { margin: 0; font-size: 2.5rem; }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+            vertical-align: middle;
+        }
 
-        /* Contenitore principale */
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Header con Gradiente Animato */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-blue), #2c3e50);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(46, 204, 113, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(39, 174, 96, 0.1) 0%, transparent 50%);
+            z-index: 0;
+            animation: pulse 15s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 { 
+            margin: 0; 
+            font-size: 3rem; 
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Contenitore principale con animazione */
         .container { 
-            max-width: 1000px; 
-            margin: -40px auto 40px; 
-            background: var(--white); 
-            padding: 50px; 
-            border-radius: 15px; 
-            box-shadow: var(--shadow); 
+            max-width: 1100px; 
+            margin: -60px auto 60px; 
+            background: var(--card-bg); 
+            padding: 70px; 
+            border-radius: 24px; 
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 2;
+            animation: containerAppear 1s ease-out 0.5s both;
+        }
+
+        @keyframes containerAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        section.animate {
+            animation: sectionAppear 0.6s ease-out forwards;
+        }
+
+        @keyframes sectionAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h2 { 
             color: var(--dark-blue); 
             margin-top: 40px; 
-            border-left: 5px solid var(--primary-green);
-            padding-left: 15px;
-        }
-
-        p { margin-bottom: 20px; }
-
-        .highlight-box {
-            background-color: #f0fff4;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px inset #dcfce7;
-            font-size: 1.1rem;
-            margin: 30px 0;
+            margin-bottom: 25px;
+            padding-left: 0px;
             position: relative;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+			gap: 20px;
         }
 
-        /* Griglia di confronto migliorata */
-        .comparison {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
+        h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 30px;
+            width: 6px;
+            background: var(--primary-gradient);
+            border-radius: 3px;
         }
 
-        .comp-card {
-            padding: 25px;
-            border-radius: 12px;
-            background: #fff;
-            border: 1px solid #eee;
+        h2 i {
+            margin-left: 15px;
+            font-size: 1.8rem;
+            color: var(--primary-green);
+        }
+
+        p { 
+            margin-bottom: 25px; 
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Highlight box migliorato */
+        .highlight-box {
+            background: linear-gradient(135deg, #f0fff4, #dcfce7);
+            padding: 40px;
+            border-radius: 18px;
+            border: 1px solid #bbf7d0;
+            font-size: 1.2rem;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
             transition: transform 0.3s ease;
         }
 
-        .comp-card:hover {
+        .highlight-box:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-md);
+        }
+
+        .highlight-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--primary-gradient);
+        }
+
+        .highlight-box strong {
+            color: var(--dark-blue);
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        /* Griglia di confronto migliorata con animazioni */
+        .comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .comp-card {
+            padding: 35px;
+            border-radius: 16px;
+            background: var(--card-bg);
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .comp-card.animate {
+            animation: cardAppear 0.6s ease-out forwards;
+        }
+
+        .comp-card:nth-child(1).animate {
+            animation-delay: 0.1s;
+        }
+
+        .comp-card:nth-child(2).animate {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .comp-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .comp-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .comp-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
 
         .comp-card h3 { 
@@ -117,89 +370,322 @@
             color: var(--secondary-green); 
             display: flex;
             align-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
         }
 
-        /* Lista caratteristiche */
+        .comp-card h3 i {
+            margin-right: 12px;
+            font-size: 1.8rem;
+        }
+
+        /* Lista caratteristiche animata */
         .features-list {
             list-style: none;
             padding: 0;
+            margin: 30px 0;
         }
 
         .features-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 20px 0;
+            border-bottom: 1px solid #f1f5f9;
             display: flex;
             align-items: flex-start;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .features-list li.animate {
+            animation: listItemAppear 0.5s ease-out forwards;
+        }
+
+        .features-list li:nth-child(1).animate {
+            animation-delay: 0.1s;
+        }
+
+        .features-list li:nth-child(2).animate {
+            animation-delay: 0.2s;
+        }
+
+        .features-list li:nth-child(3).animate {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes listItemAppear {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .features-list li:hover {
+            background: rgba(46, 204, 113, 0.05);
+            padding-left: 15px;
+            border-radius: 8px;
         }
 
         .features-list li::before {
             content: "✓";
             color: var(--primary-green);
             font-weight: bold;
-            margin-right: 15px;
+            font-size: 1.3rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+            margin-top: 3px;
         }
 
-.image-placeholder {
-    width: 100%;
-    max-width: 600px;      /* larghezza massima del riquadro */
-    margin: 20px auto;      /* centrato */
-    padding: 15px;
-    border: 2px solid #ddd; /* bordo solido */
-    border-radius: 10px;
-    background-color: #f8f9fa;
-    text-align: center;
-}
+        .features-list li strong {
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 8px;
+        }
 
-.image-placeholder img {
-    width: 100%;       /* si adatta alla larghezza del riquadro */
-    height: auto;      /* mantiene proporzioni */
-    object-fit: contain;
-    border-radius: 8px; /* opzionale: arrotonda angoli dell’immagine */
-}
+        /* Immagine con effetto */
+        .image-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 16px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
 
+        .image-container.animate {
+            animation: imageAppear 0.8s ease-out forwards;
+        }
 
-        footer { text-align: center; padding: 40px; color: #7f8c8d; font-size: 0.9rem; }
+        @keyframes imageAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .image-container:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+
+        /* Lista standard migliorata */
+        ul:not(.features-list) {
+            padding-left: 25px;
+            margin: 25px 0;
+        }
+
+        ul:not(.features-list) li {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        ul:not(.features-list) li:hover {
+            color: var(--dark-blue);
+            transform: translateX(5px);
+        }
+
+        ul:not(.features-list) li::before {
+            content: "•";
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: -20px;
+            top: -2px;
+        }
+
+        ul:not(.features-list) li strong {
+            color: var(--dark-blue);
+        }
+
+        /* Footer migliorato */
+        footer {
+            text-align: center; 
+            padding: 60px 20px 40px; 
+            color: #94a3b8; 
+            font-size: 0.95rem; 
+            background: var(--dark-blue);
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #334155, transparent);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: var(--shadow-green);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(46, 204, 113, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .container { 
+                padding: 50px; 
+                margin: -40px 20px 40px; 
+            }
+        }
 
         @media (max-width: 768px) {
-            .container { padding: 25px; margin-top: 0; border-radius: 0; }
-            .hero h1 { font-size: 1.8rem; }
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            
+            nav a {
+                margin: 5px 8px;
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .hero h1 { 
+                font-size: 2.2rem; 
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .container { 
+                padding: 30px; 
+                margin-top: 0; 
+                border-radius: 20px;
+            }
+            
+            .comparison {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
-		
-		/* Logo nella nav */
-nav a.logo {
-    margin-right: 40px; /* spazio tra logo e link */
-}
-
-nav a.logo img {
-    height: 60px; /* altezza del logo più grande */
-    width: auto;
-    vertical-align: middle;
-}
-
     </style>
 </head>
 <body>
 
-<nav>
+<nav id="navbar">
     <a href="index.html" class="logo">
         <img src="logo.png" alt="Logo Peer-to-Peer">
     </a>
-    <a href="cos-e-p2p.html">Cos'è il P2P</a>
-    <a href="applicazioni.html">Applicazioni</a>
-    <a href="pro-contro.html">Pro e Contro</a>
-    <a href="storia.html">Storia</a>
-    <a href="glossario.html">Glossario</a>
+    <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="cos-e-p2p.html"><i class="fas fa-network-wired"></i> Cos'è il P2P</a>
+        <a href="applicazioni.html"><i class="fas fa-microchip"></i> Applicazioni</a>
+        <a href="pro-contro.html"><i class="fas fa-balance-scale"></i> Pro e Contro</a>
+        <a href="storia.html"><i class="fas fa-history"></i> Storia</a>
+        <a href="glossario.html"><i class="fas fa-book"></i> Glossario</a>
+    </div>
 </nav>
 
-
 <header class="hero">
-    <h1>Cos'è il Peer-to-Peer (P2P)?</h1>
-    <p>Oltre il download: la rivoluzione della rete decentralizzata</p>
+    <div class="hero-content">
+        <h1>Cos'è il Peer-to-Peer (P2P)?</h1>
+        <p>Oltre il download: la rivoluzione della rete decentralizzata</p>
+    </div>
 </header>
 
 <div class="container"> 
     
-    <section>
+    <section class="animate-on-scroll">
         <div class="highlight-box">
             <strong>Definizione:</strong> In informatica, il Peer-to-Peer (letteralmente "da pari a pari") è un'architettura logica di rete in cui i nodi non sono gerarchizzati sotto forma di client o server fissi, ma agiscono come "entità paritarie". Ogni partecipante è sia fornitore che utilizzatore di risorse.
         </div>
@@ -209,47 +695,48 @@ nav a.logo img {
         </p>
     </section>
 
-    <div class="image-placeholder">
+    <div class="image-container animate-on-scroll">
         <img src="p2p.png" alt="Diagramma: Architettura a maglia P2P vs Architettura a stella Client-Server">
+        <div class="image-caption">Diagramma comparativo: Architettura a maglia P2P vs Architettura a stella Client-Server</div>
     </div>
 
-    <section>
-        <h2>I 3 Pilastri del P2P</h2>
+    <section class="animate-on-scroll">
+        <h2><i class="fas fa-columns"></i> I 3 Pilastri del P2P</h2>
         <ul class="features-list">
-            <li>
+            <li class="animate-on-scroll">
                 <strong>Auto-scalabilità (Self-scalability):</strong>
                 È la caratteristica più sorprendente. In un sistema client-server, più utenti ci sono, più il server rallenta. Nel P2P, ogni nuovo utente aggiunge nuova potenza di calcolo o banda, rendendo la rete potenzialmente più veloce man mano che cresce.
             </li>
-            <li>
+            <li class="animate-on-scroll">
                 <strong>Resilienza e Robustezza:</strong>
                 Non essendoci un punto centrale di fallimento (Single Point of Failure), se un computer si scollega, gli altri continuano a comunicare. La rete è praticamente indistruttibile finché rimangono almeno due nodi attivi.
             </li>
-            <li>
+            <li class="animate-on-scroll">
                 <strong>Decentralizzazione del potere:</strong>
                 Nessuna autorità centrale può facilmente censurare o interrompere il flusso di dati, poiché l'informazione è distribuita in frammenti su migliaia di macchine diverse in tutto il mondo.
             </li>
         </ul>
     </section>
 
-    <section>
-        <h2>Tipologie di reti Peer-to-Peer</h2>
+    <section class="animate-on-scroll">
+        <h2><i class="fas fa-project-diagram"></i> Tipologie di reti Peer-to-Peer</h2>
         <p>
             Non tutte le reti P2P sono uguali. Si evolvono in base a come i nodi si scambiano le informazioni:
         </p>
         <div class="comparison">
-            <div class="comp-card">
-                <h3>P2P Puro</h3>
+            <div class="comp-card animate-on-scroll">
+                <h3><i class="fas fa-asterisk"></i> P2P Puro</h3>
                 <p>Completamente decentralizzato. Non esiste alcun server. Gli utenti devono trovarsi l'un l'altro attraverso messaggi di "broadcast". È il modello più libero ma più difficile da gestire tecnicamente (es. Gnutella).</p>
             </div>
-            <div class="comp-card">
-                <h3>P2P Ibrido</h3>
+            <div class="comp-card animate-on-scroll">
+                <h3><i class="fas fa-blender-phone"></i> P2P Ibrido</h3>
                 <p>Esistono dei "Supernodi" o server centrali che tengono traccia di dove si trovano i file, ma lo scambio vero e proprio avviene tra utenti. È molto veloce nella ricerca (es. il vecchio Napster o eMule).</p>
             </div>
         </div>
     </section>
 
-    <section>
-        <h2>Esempi d'uso moderni</h2>
+    <section class="animate-on-scroll">
+        <h2><i class="fas fa-lightbulb"></i> Esempi d'uso moderni</h2>
         <p>Spesso associamo il P2P solo alla pirateria, ma oggi è la base di tecnologie fondamentali:</p>
         <ul>
             <li><strong>Blockchain e Criptovalute:</strong> Bitcoin funziona su una rete P2P dove ogni nodo convalida le transazioni senza banche centrali.</li>
@@ -259,14 +746,14 @@ nav a.logo img {
         </ul>
     </section>
 
-    <div class="comparison" style="margin-top: 50px;">
-        <div class="comp-card" style="border-top: 4px solid #e74c3c;">
-            <h3>Modello Client-Server</h3>
-            <p>Ideale per servizi che richiedono controllo centralizzato e sicurezza garantita (es. Online Banking, Email).</p>
+    <div class="comparison" style="margin-top: 60px;">
+        <div class="comp-card animate-on-scroll" style="border-top: 4px solid #e74c3c;">
+            <h3><i class="fas fa-server"></i> Modello Client-Server</h3>
+            <p>Ideale per servizi che richiedono controllo centralizzato e sicurezza garantita (es. Online Banking, Email). La gestione è centralizzata ma può rappresentare un singolo punto di fallimento.</p>
         </div>
-        <div class="comp-card" style="border-top: 4px solid var(--primary-green);">
-            <h3>Modello Peer-to-Peer</h3>
-            <p>Ideale per la condivisione di grandi volumi di dati e per sistemi che devono resistere a censure o guasti massivi.</p>
+        <div class="comp-card animate-on-scroll" style="border-top: 4px solid var(--primary-green);">
+            <h3><i class="fas fa-users"></i> Modello Peer-to-Peer</h3>
+            <p>Ideale per la condivisione di grandi volumi di dati e per sistemi che devono resistere a censure o guasti massivi. Più decentralizzato ma può essere più complesso da gestire.</p>
         </div>
     </div>
 
@@ -275,7 +762,155 @@ nav a.logo img {
 <footer>
     <p>&copy; 2026 Guida alle Tecnologie P2P - Progetto Educativo Digitale</p>
     <p>Creato per scopi didattici da Khalid e Stefano.</p>
+    <div class="footer-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="cos-e-p2p.html"><i class="fas fa-network-wired"></i> Cos'è il P2P</a>
+        <a href="applicazioni.html"><i class="fas fa-microchip"></i> Applicazioni</a>
+        <a href="pro-contro.html"><i class="fas fa-balance-scale"></i> Pro e Contro</a>
+        <a href="storia.html"><i class="fas fa-history"></i> Storia</a>
+        <a href="glossario.html"><i class="fas fa-book"></i> Glossario</a>
+    </div>
 </footer>
+
+<a href="#" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
+<script>
+    // Animazioni al caricamento della pagina
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animazione navbar al scroll
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+            
+            // Mostra/nascondi pulsante "torna su"
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // Funzione per controllare se un elemento è visibile
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 &&
+                rect.bottom >= 0
+            );
+        }
+        
+        // Funzione per attivare le animazioni quando gli elementi entrano in viewport
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const sections = document.querySelectorAll('section');
+            const compCards = document.querySelectorAll('.comp-card');
+            const listItems = document.querySelectorAll('.features-list li');
+            const imageContainer = document.querySelector('.image-container');
+            
+            elements.forEach(element => {
+                if (isElementInViewport(element)) {
+                    element.classList.add('animate');
+                }
+            });
+            
+            sections.forEach(section => {
+                if (isElementInViewport(section)) {
+                    section.classList.add('animate');
+                }
+            });
+            
+            compCards.forEach(card => {
+                if (isElementInViewport(card)) {
+                    card.classList.add('animate');
+                }
+            });
+            
+            listItems.forEach(item => {
+                if (isElementInViewport(item)) {
+                    item.classList.add('animate');
+                }
+            });
+            
+            if (imageContainer && isElementInViewport(imageContainer)) {
+                imageContainer.classList.add('animate');
+            }
+        }
+        
+        // Esegui all'inizio e durante lo scroll
+        animateOnScroll();
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Effetti hover per le card di confronto
+        const compCards = document.querySelectorAll('.comp-card');
+        compCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Effetto per l'highlight box
+        const highlightBox = document.querySelector('.highlight-box');
+        if (highlightBox) {
+            highlightBox.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            highlightBox.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        }
+        
+        // Effetto per l'immagine
+        const imageContainer = document.querySelector('.image-container');
+        if (imageContainer) {
+            imageContainer.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            imageContainer.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        }
+        
+        // Effetto di digitazione per il titolo hero (opzionale)
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                heroTitle.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        // Avvia l'effetto di digitazione dopo un breve ritardo
+        setTimeout(typeWriter, 500);
+        
+        // Pulsante "torna su"
+        backToTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

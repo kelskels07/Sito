@@ -4,203 +4,705 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro e Contro | Analisi Tecnica dell'Architettura P2P</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-green: #2ecc71;
             --secondary-green: #27ae60;
             --danger-red: #e74c3c;
-            --dark-blue: #2c3e50;
-            --light-bg: #f4f7f6;
+            --primary-gradient: linear-gradient(135deg, #2ecc71, #27ae60);
+            --danger-gradient: linear-gradient(135deg, #e74c3c, #c0392b);
+            --dark-blue: #1a252f;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --text-light: #718096;
             --white: #ffffff;
-            --text-main: #444;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-green: 0 10px 30px rgba(46, 204, 113, 0.3);
+            --shadow-red: 0 10px 30px rgba(231, 76, 60, 0.2);
         }
 
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body { 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             line-height: 1.8; 
-            margin: 0; 
             background-color: var(--light-bg); 
-            color: var(--text-main); 
+            color: var(--text-main);
+            overflow-x: hidden;
         }
         
-        /* Navigazione Coerente */
+        /* Navigazione Moderna */
         nav { 
-            background: var(--dark-blue); 
-            padding: 1.2rem; 
+            background: rgba(26, 37, 47, 0.95);
+            padding: 1.2rem 2rem; 
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            padding: 0.8rem 2rem;
+            background: rgba(26, 37, 47, 0.98);
         }
         
         nav a { 
-            color: #fff; 
+            color: #e2e8f0; 
             text-decoration: none; 
             margin: 0 15px; 
-            font-weight: 500; 
+            font-weight: 600; 
             font-size: 0.9rem;
             transition: all 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 4px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
         }
         
-        nav a:hover { background: var(--primary-green); color: var(--dark-blue); }
+        nav a:hover { 
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--primary-green);
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
         
-        /* Hero Section */
+        .logo {
+            margin-right: 40px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Hero Section con Animazione */
         .hero {
-            background: linear-gradient(135deg, var(--dark-blue), #34495e);
+            background: linear-gradient(135deg, var(--dark-blue), #2c3e50);
             color: white;
-            padding: 60px 20px;
+            padding: 100px 20px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero h1 { margin: 0; font-size: 2.5rem; }
-        .hero p { opacity: 0.9; font-size: 1.1rem; max-width: 800px; margin: 10px auto; }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(46, 204, 113, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(231, 76, 60, 0.1) 0%, transparent 50%);
+            z-index: 0;
+            animation: pulse 15s infinite alternate;
+        }
 
-        /* Contenitore */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 { 
+            margin: 0; 
+            font-size: 3rem; 
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        /* Contenitore Principale */
         .container { 
-            max-width: 1100px; 
-            margin: -40px auto 40px; 
-            background: var(--white); 
-            padding: 50px; 
-            border-radius: 15px; 
-            box-shadow: var(--shadow); 
+            max-width: 1200px; 
+            margin: -60px auto 60px; 
+            background: var(--card-bg); 
+            padding: 70px; 
+            border-radius: 24px; 
+            box-shadow: var(--shadow-lg); 
+            position: relative;
+            z-index: 2;
+            animation: containerAppear 1s ease-out 0.5s both;
+        }
+
+        @keyframes containerAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .intro-section {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid #f1f5f9;
         }
 
-        /* Grid Layout */
+        .intro-section p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Grid Layout con Animazioni */
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 50px;
             margin-top: 20px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 1100px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
         }
 
         .analysis-card {
-            padding: 40px;
-            border-radius: 15px;
+            padding: 50px 40px;
+            border-radius: 20px;
             height: 100%;
             position: relative;
-            transition: transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .analysis-card.animate {
+            animation: cardAppear 0.6s ease-out forwards;
+        }
+
+        .pros-card.animate {
+            animation-delay: 0.1s;
+        }
+
+        .cons-card.animate {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .analysis-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .pros-card::before {
+            background: var(--primary-gradient);
+        }
+
+        .cons-card::before {
+            background: var(--danger-gradient);
+        }
+
+        .analysis-card:hover::before {
+            transform: scaleX(1);
         }
 
         .analysis-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
         }
 
         .pros-card {
-            background-color: #f0fff4;
-            border: 1px solid #dcfce7;
+            background: linear-gradient(135deg, #f0fff4, #dcfce7);
+            border: 1px solid #bbf7d0;
+        }
+
+        .pros-card:hover {
+            box-shadow: var(--shadow-green);
         }
 
         .cons-card {
-            background-color: #fff5f5;
-            border: 1px solid #fee2e2;
+            background: linear-gradient(135deg, #fff5f5, #fee2e2);
+            border: 1px solid #fecaca;
+        }
+
+        .cons-card:hover {
+            box-shadow: var(--shadow-red);
         }
 
         .analysis-card h2 {
             margin-top: 0;
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 1.8rem;
+            gap: 20px;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(0,0,0,0.05);
         }
 
-        .pros-card h2 { color: var(--secondary-green); }
-        .cons-card h2 { color: var(--danger-red); }
+        .pros-card h2 { 
+            color: var(--secondary-green); 
+        }
 
-        /* List Styling */
+        .cons-card h2 { 
+            color: var(--danger-red); 
+        }
+
+        .analysis-card h2 i {
+            font-size: 2.5rem;
+        }
+
+        /* List Styling con Animazioni */
         .analysis-list {
             list-style: none;
             padding: 0;
         }
 
         .analysis-list li {
-            margin-bottom: 25px;
-            padding-left: 35px;
+            margin-bottom: 35px;
+            padding: 25px;
             position: relative;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .pros-card .analysis-list li {
+            transform: translateX(-20px);
+        }
+
+        .cons-card .analysis-list li {
+            transform: translateX(20px);
+        }
+
+        .analysis-list li.animate {
+            animation: listItemAppear 0.5s ease-out forwards;
+        }
+
+        .pros-card .analysis-list li:nth-child(1).animate {
+            animation-delay: 0.2s;
+        }
+
+        .pros-card .analysis-list li:nth-child(2).animate {
+            animation-delay: 0.3s;
+        }
+
+        .pros-card .analysis-list li:nth-child(3).animate {
+            animation-delay: 0.4s;
+        }
+
+        .pros-card .analysis-list li:nth-child(4).animate {
+            animation-delay: 0.5s;
+        }
+
+        .cons-card .analysis-list li:nth-child(1).animate {
+            animation-delay: 0.2s;
+        }
+
+        .cons-card .analysis-list li:nth-child(2).animate {
+            animation-delay: 0.3s;
+        }
+
+        .cons-card .analysis-list li:nth-child(3).animate {
+            animation-delay: 0.4s;
+        }
+
+        .cons-card .analysis-list li:nth-child(4).animate {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes listItemAppear {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .analysis-list li:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pros-card .analysis-list li:hover {
+            background: #ffffff;
+        }
+
+        .cons-card .analysis-list li:hover {
+            background: #ffffff;
         }
 
         .analysis-list li::before {
             position: absolute;
-            left: 0;
+            left: 20px;
+            top: 20px;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
-        .pros-card li::before { content: "✓"; color: var(--primary-green); }
-        .cons-card li::before { content: "✕"; color: var(--danger-red); }
+        .pros-card li::before { 
+            content: "✓"; 
+            color: var(--primary-green); 
+            background: rgba(46, 204, 113, 0.1);
+        }
+
+        .cons-card li::before { 
+            content: "✕"; 
+            color: var(--danger-red); 
+            background: rgba(231, 76, 60, 0.1);
+        }
 
         .analysis-list strong {
             display: block;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
             color: var(--dark-blue);
+            margin-left: 50px;
         }
 
         .analysis-list p {
             margin: 0;
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.6;
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-left: 50px;
         }
 
-        /* Summary Box */
+        /* Summary Box con Animazione */
         .verdict {
-            margin-top: 60px;
-            padding: 40px;
-            background: #f8f9fa;
-            border-radius: 12px;
+            margin-top: 80px;
+            padding: 60px;
+            background: linear-gradient(135deg, #f8f9fa, #f1f5f9);
+            border-radius: 20px;
             border-left: 6px solid var(--dark-blue);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: var(--shadow-sm);
         }
 
-        .verdict h3 { margin-top: 0; color: var(--dark-blue); }
-
-        footer { text-align: center; padding: 40px; color: #7f8c8d; font-size: 0.9rem; }
-
-        @media (max-width: 900px) {
-            .comparison-grid { grid-template-columns: 1fr; }
-            .container { padding: 30px; }
+        .verdict.animate {
+            animation: verdictAppear 0.8s ease-out forwards;
+            animation-delay: 0.3s;
         }
-		
-		/* Logo nella nav */
-nav a.logo {
-    margin-right: 40px; /* spazio tra logo e link */
-}
 
-nav a.logo img {
-    height: 60px; /* altezza del logo più grande */
-    width: auto;
-    vertical-align: middle;
-}
+        @keyframes verdictAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
+        .verdict:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-left: 6px solid var(--primary-green);
+        }
+
+        .verdict h3 { 
+            margin-top: 0; 
+            color: var(--dark-blue); 
+            font-size: 2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .verdict h3 i {
+            margin-right: 15px;
+            color: var(--primary-green);
+            font-size: 2.2rem;
+        }
+
+        .verdict p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-light);
+        }
+
+        .verdict strong {
+            color: var(--dark-blue);
+            background: linear-gradient(120deg, rgba(46, 204, 113, 0.1) 0%, rgba(46, 204, 113, 0) 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* Footer - Migliorato */
+        footer {
+            text-align: center; 
+            padding: 60px 20px 40px; 
+            color: #94a3b8; 
+            font-size: 0.95rem; 
+            background: var(--dark-blue);
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #334155, transparent);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: var(--shadow-green);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(46, 204, 113, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .container { 
+                padding: 50px; 
+                margin: -40px 20px 40px; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            
+            nav a {
+                margin: 5px 8px;
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .hero h1 { 
+                font-size: 2.2rem; 
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .container { 
+                padding: 30px; 
+                margin-top: 0; 
+                border-radius: 20px;
+            }
+            
+            .analysis-card {
+                padding: 35px 25px;
+            }
+            
+            .analysis-card h2 {
+                font-size: 1.8rem;
+            }
+            
+            .analysis-list li {
+                padding: 20px;
+            }
+            
+            .analysis-list strong {
+                font-size: 1.1rem;
+                margin-left: 0;
+                padding-left: 45px;
+            }
+            
+            .analysis-list p {
+                margin-left: 0;
+                padding-left: 45px;
+            }
+            
+            .verdict {
+                padding: 40px 25px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
-<nav>
+<nav id="navbar">
     <a href="index.html" class="logo">
         <img src="logo.png" alt="Logo Peer-to-Peer">
     </a>
-    <a href="cos-e-p2p.html">Cos'è il P2P</a>
-    <a href="applicazioni.html">Applicazioni</a>
-    <a href="pro-contro.html">Pro e Contro</a>
-    <a href="storia.html">Storia</a>
-    <a href="glossario.html">Glossario</a>
+    <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="cos-e-p2p.html"><i class="fas fa-network-wired"></i> Cos'è il P2P</a>
+        <a href="applicazioni.html"><i class="fas fa-microchip"></i> Applicazioni</a>
+        <a href="pro-contro.html"><i class="fas fa-balance-scale"></i> Pro e Contro</a>
+        <a href="storia.html"><i class="fas fa-history"></i> Storia</a>
+        <a href="glossario.html"><i class="fas fa-book"></i> Glossario</a>
+    </div>
 </nav>
 
-
 <header class="hero">
-    <h1>Analisi Critica del P2P</h1>
-    <p>Valutazione tecnica dei vantaggi strategici e delle sfide strutturali delle reti decentralizzate.</p>
+    <div class="hero-content">
+        <h1>Analisi Critica del P2P</h1>
+        <p>Valutazione tecnica dei vantaggi strategici e delle sfide strutturali delle reti decentralizzate.</p>
+    </div>
 </header>
 
 <div class="container">
@@ -209,44 +711,44 @@ nav a.logo img {
     </div>
 
     <div class="comparison-grid">
-        <div class="analysis-card pros-card">
-            <h2>Vantaggi</h2>
+        <div class="analysis-card pros-card animate-on-scroll">
+            <h2><i class="fas fa-thumbs-up"></i> Vantaggi</h2>
             <ul class="analysis-list">
-                <li>
+                <li class="animate-on-scroll">
                     <strong>Scalabilità Organica</strong>
                     <p>In un sistema tradizionale, l'aggiunta di utenti appesantisce il server. Nel P2P, ogni nuovo utente porta con sé banda e spazio disco, rendendo la rete più performante all'aumentare della partecipazione.</p>
                 </li>
-                <li>
+                <li class="animate-on-scroll">
                     <strong>Resistenza ai Guasti (Fault Tolerance)</strong>
                     <p>Non esiste un "Single Point of Failure". La scomparsa di un nodo non compromette la disponibilità della risorsa, che rimane replicata su altri peer sparsi globalmente.</p>
                 </li>
-                <li>
+                <li class="animate-on-scroll">
                     <strong>Efficienza nei Costi</strong>
                     <p>Le organizzazioni possono distribuire enormi quantità di dati senza investire in infrastrutture server costose o CDN (Content Delivery Network), sfruttando le risorse già esistenti alla periferia della rete.</p>
                 </li>
-                <li>
+                <li class="animate-on-scroll">
                     <strong>Resistenza alla Censura</strong>
                     <p>Essendo i dati distribuiti e non centralizzati, è estremamente difficile per un'autorità singola bloccare o rimuovere un contenuto dalla rete, garantendo una maggiore libertà di informazione.</p>
                 </li>
             </ul>
         </div>
 
-        <div class="analysis-card cons-card">
-            <h2>Svantaggi</h2>
+        <div class="analysis-card cons-card animate-on-scroll">
+            <h2><i class="fas fa-thumbs-down"></i> Svantaggi</h2>
             <ul class="analysis-list">
-                <li>
+                <li class="animate-on-scroll">
                     <strong>Sicurezza e Integrità</strong>
                     <p>È difficile verificare l'identità dei nodi. Malintenzionati possono immettere file corrotti o malware (pratica nota come <em>poisoning</em>) per compromettere la sicurezza degli altri partecipanti.</p>
                 </li>
-                <li>
+                <li class="animate-on-scroll">
                     <strong>Consumo di Risorse Locali</strong>
                     <p>A differenza dei sistemi client, il P2P richiede che l'utente offra la propria banda in upload. Questo può rallentare la connessione domestica e consumare energia e cicli di CPU in modo continuativo.</p>
                 </li>
-                <li>
+                <li class="animate-on-scroll">
                     <strong>Problema della Disponibilità (Churn)</strong>
                     <p>La rete dipende dalla generosità dei "Seeder". Se gli utenti scaricano e scollegono immediatamente (comportamento da <em>Leecher</em>), la disponibilità dei file rari crolla drasticamente.</p>
                 </li>
-                <li>
+                <li class="animate-on-scroll">
                     <strong>Complessità di Ricerca</strong>
                     <p>Trovare un file in una rete senza un indice centrale è tecnicamente complesso e richiede protocolli di routing sofisticati (come le tabelle DHT), che possono risultare più lenti di una query a un database centrale.</p>
                 </li>
@@ -254,18 +756,160 @@ nav a.logo img {
         </div>
     </div>
 
-    <section class="verdict">
-        <h3>Il Verdetto Tecnico</h3>
+    <section class="verdict animate-on-scroll">
+        <h3><i class="fas fa-gavel"></i> Il Verdetto Tecnico</h3>
         <p>
-            Il modello P2P non sostituisce il Client-Server, ma lo integra. È la scelta d'elezione per la <strong>distribuzione di massa di dati statici</strong> e per sistemi dove la <strong>privacy e l'indipendenza</strong> sono prioritarie (come nelle criptovalute). Tuttavia, per servizi che richiedono transazioni in tempo reale garantite, alta sicurezza centralizzata e gestione degli utenti (come l'e-commerce o il banking), il modello tradizionale rimane superiore.
+            Il modello P2P non sostituisce il Client-Server, ma lo integra. È la scelta d'elezione per la <strong>distribuzione di massa di dati statici</strong> e per sistemi dove la <strong>privacy e l'indipendenza</strong> sono prioritarie (come nelle criptovalute). Tuttavia, per servizi che richiedono transazioni in tempo reale garantite, alta sicurezza centralizzata e gestione degli utenti (come l'e-commerce o il banking), il modello tradizionale rimane superiore. La scelta dipende dagli obiettivi specifici del sistema e dal compromesso accettabile tra decentralizzazione, efficienza e controllo.
         </p>
     </section>
 </div>
 
 <footer>
     <p>&copy; 2026 Guida alle Tecnologie P2P - Analisi Tecnica e Strutturale</p>
-	<p>Creato per scopi didattici da Khalid e Stefano.</p>
+    <p>Creato per scopi didattici da Khalid e Stefano.</p>
+    <div class="footer-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="cos-e-p2p.html"><i class="fas fa-network-wired"></i> Cos'è il P2P</a>
+        <a href="applicazioni.html"><i class="fas fa-microchip"></i> Applicazioni</a>
+        <a href="pro-contro.html"><i class="fas fa-balance-scale"></i> Pro e Contro</a>
+        <a href="storia.html"><i class="fas fa-history"></i> Storia</a>
+        <a href="glossario.html"><i class="fas fa-book"></i> Glossario</a>
+    </div>
 </footer>
+
+<a href="#" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
+<script>
+    // Animazioni al caricamento della pagina
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animazione navbar al scroll
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+            
+            // Mostra/nascondi pulsante "torna su"
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // Funzione per controllare se un elemento è visibile
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 &&
+                rect.bottom >= 0
+            );
+        }
+        
+        // Funzione per attivare le animazioni quando gli elementi entrano in viewport
+        function animateOnScroll() {
+            const analysisCards = document.querySelectorAll('.analysis-card');
+            const listItems = document.querySelectorAll('.analysis-list li');
+            const verdict = document.querySelector('.verdict');
+            
+            analysisCards.forEach(card => {
+                if (isElementInViewport(card)) {
+                    card.classList.add('animate');
+                }
+            });
+            
+            listItems.forEach((item, index) => {
+                if (isElementInViewport(item)) {
+                    setTimeout(() => {
+                        item.classList.add('animate');
+                    }, index * 100);
+                }
+            });
+            
+            if (verdict && isElementInViewport(verdict)) {
+                verdict.classList.add('animate');
+            }
+        }
+        
+        // Esegui all'inizio e durante lo scroll
+        animateOnScroll();
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Effetti hover per le card di analisi
+        const analysisCards = document.querySelectorAll('.analysis-card');
+        analysisCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Effetti hover per gli elementi della lista
+        const listItems = document.querySelectorAll('.analysis-list li');
+        listItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Effetto per la sezione verdict
+        const verdict = document.querySelector('.verdict');
+        if (verdict) {
+            verdict.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            verdict.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        }
+        
+        // Effetto di digitazione per il titolo hero (opzionale)
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                heroTitle.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        // Avvia l'effetto di digitazione dopo un breve ritardo
+        setTimeout(typeWriter, 500);
+        
+        // Pulsante "torna su"
+        backToTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Aggiungi classe animate-on-scroll a tutti gli elementi che devono essere animati
+        const animateElements = document.querySelectorAll('.analysis-card, .analysis-list li, .verdict');
+        animateElements.forEach(el => {
+            el.classList.add('animate-on-scroll');
+        });
+    });
+</script>
 
 </body>
 </html>

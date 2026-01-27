@@ -4,238 +4,716 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glossario P2P | Dizionario Tecnico Completo</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-green: #2ecc71;
             --secondary-green: #27ae60;
-            --dark-blue: #2c3e50;
+            --primary-gradient: linear-gradient(135deg, #2ecc71, #27ae60);
+            --dark-blue: #1a252f;
             --accent-blue: #3498db;
-            --light-bg: #f4f7f6;
+            --accent-gradient: linear-gradient(135deg, #3498db, #2980b9);
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --text-light: #718096;
             --white: #ffffff;
-            --text-main: #444;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-green: 0 10px 30px rgba(46, 204, 113, 0.3);
+            --shadow-blue: 0 10px 30px rgba(52, 152, 219, 0.2);
         }
 
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body { 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             line-height: 1.8; 
-            margin: 0; 
             background-color: var(--light-bg); 
-            color: var(--text-main); 
+            color: var(--text-main);
+            overflow-x: hidden;
         }
-
-        /* NAV */
+        
+        /* Navigazione Moderna */
         nav { 
-            background: var(--dark-blue); 
-            padding: 1.2rem; 
+            background: rgba(26, 37, 47, 0.95);
+            padding: 1.2rem 2rem; 
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            padding: 0.8rem 2rem;
+            background: rgba(26, 37, 47, 0.98);
         }
         
         nav a { 
-            color: #fff; 
+            color: #e2e8f0; 
             text-decoration: none; 
             margin: 0 15px; 
-            font-weight: 500; 
+            font-weight: 600; 
             font-size: 0.9rem;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
         }
         
-        nav a:hover { background: var(--primary-green); color: var(--dark-blue); }
-
-        /* HERO */
-        .hero {
-            background: linear-gradient(135deg, var(--dark-blue), #34495e);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
+        nav a:hover { 
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--primary-green);
         }
 
-        .hero h1 { margin: 0; font-size: 2.5rem; }
-        .hero p { opacity: 0.9; font-size: 1.1rem; max-width: 800px; margin: 10px auto; }
-
-        /* CONTAINER */
-        .container { 
-            max-width: 1000px; 
-            margin: -40px auto 40px; 
-            background: var(--white); 
-            padding: 50px; 
-            border-radius: 15px; 
-            box-shadow: var(--shadow); 
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
 
-        /* SEARCH */
-        .search-box {
-            margin-bottom: 40px;
+        nav a:hover::after {
+            width: 80%;
+        }
+        
+        .logo {
+            margin-right: 40px;
             display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Hero Section con Animazione */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-blue), #2c3e50);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(46, 204, 113, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 50%);
+            z-index: 0;
+            animation: pulse 15s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 { 
+            margin: 0; 
+            font-size: 3rem; 
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        /* Contenitore Principale */
+        .container { 
+            max-width: 1100px; 
+            margin: -60px auto 60px; 
+            background: var(--card-bg); 
+            padding: 70px; 
+            border-radius: 24px; 
+            box-shadow: var(--shadow-lg); 
+            position: relative;
+            z-index: 2;
+            animation: containerAppear 1s ease-out 0.5s both;
+        }
+
+        @keyframes containerAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search Box Avanzata */
+        .search-box {
+            margin-bottom: 60px;
+            position: relative;
         }
 
         .search-box input {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #eee;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 20px 25px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            font-size: 1.1rem;
             outline: none;
+            transition: all 0.3s ease;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-sm);
         }
 
-        .search-box input:focus { border-color: var(--accent-blue); }
+        .search-box input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1), var(--shadow-md);
+            transform: translateY(-3px);
+        }
 
-        /* GLOSSARY */
+        .search-box i {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        .search-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .term-count {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* Glossario Grid con Animazioni */
         .glossary-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        @media (max-width: 1100px) {
+            .glossary-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .glossary-item {
-            padding: 30px;
-            background: #fff;
-            border: 1px solid #f0f0f0;
-            border-radius: 12px;
-            border-left: 6px solid #ddd;
-            transition: 0.3s;
+            padding: 35px;
+            background: var(--card-bg);
+            border: 2px solid #e2e8f0;
+            border-radius: 18px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .glossary-item.animate {
+            animation: glossaryItemAppear 0.6s ease-out forwards;
+        }
+
+        .glossary-item:nth-child(1).animate {
+            animation-delay: 0.1s;
+        }
+
+        .glossary-item:nth-child(2).animate {
+            animation-delay: 0.2s;
+        }
+
+        .glossary-item:nth-child(3).animate {
+            animation-delay: 0.3s;
+        }
+
+        .glossary-item:nth-child(4).animate {
+            animation-delay: 0.4s;
+        }
+
+        .glossary-item:nth-child(5).animate {
+            animation-delay: 0.5s;
+        }
+
+        .glossary-item:nth-child(6).animate {
+            animation-delay: 0.6s;
+        }
+
+        .glossary-item:nth-child(7).animate {
+            animation-delay: 0.7s;
+        }
+
+        .glossary-item:nth-child(8).animate {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes glossaryItemAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glossary-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .glossary-item:hover::before {
+            transform: scaleX(1);
         }
 
         .glossary-item:hover {
-            border-left-color: var(--primary-green);
-            transform: translateX(8px);
-            box-shadow: var(--shadow);
+            transform: translateY(-12px);
+            border-color: var(--primary-green);
+            box-shadow: var(--shadow-lg);
         }
 
         .glossary-item dt {
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--dark-blue);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .glossary-item:hover dt {
+            color: var(--secondary-green);
+        }
+
+        .glossary-item dt i {
+            font-size: 1.6rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--primary-green);
+            transition: all 0.3s ease;
+        }
+
+        .glossary-item:hover dt i {
+            background: var(--primary-gradient);
+            color: white;
+            transform: rotate(10deg) scale(1.1);
         }
 
         .glossary-item dd {
             margin: 0;
-            color: #666;
-            font-size: 1rem;
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
 
         .meta {
-            display: block;
+            display: inline-flex;
+            align-items: center;
             margin-top: 15px;
             font-size: 0.85rem;
             color: var(--accent-blue);
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
+            padding: 6px 15px;
+            border-radius: 20px;
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            transition: all 0.3s ease;
         }
 
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
+        .glossary-item:hover .meta {
+            background: var(--accent-gradient);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-blue);
+        }
+
+        .meta i {
+            margin-right: 8px;
             font-size: 0.9rem;
         }
 
-        @media (max-width: 768px) {
-            .container { padding: 25px; margin-top: 0; border-radius: 0; }
+        /* Categorie */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
         }
-		
-		/* Logo nella nav */
-nav a.logo {
-    margin-right: 40px; /* spazio tra logo e link */
-}
 
-nav a.logo img {
-    height: 60px; /* altezza del logo più grande */
-    width: auto;
-    vertical-align: middle;
-}
+        .category-btn {
+            padding: 10px 20px;
+            background: #f1f5f9;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
+        .category-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        .category-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: var(--primary-green);
+            box-shadow: var(--shadow-green);
+        }
+
+        /* Footer - Migliorato */
+        footer {
+            text-align: center; 
+            padding: 60px 20px 40px; 
+            color: #94a3b8; 
+            font-size: 0.95rem; 
+            background: var(--dark-blue);
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #334155, transparent);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: var(--shadow-green);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 35px rgba(46, 204, 113, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .container { 
+                padding: 50px; 
+                margin: -40px 20px 40px; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            
+            nav a {
+                margin: 5px 8px;
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .hero h1 { 
+                font-size: 2.2rem; 
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .container { 
+                padding: 30px; 
+                margin-top: 0; 
+                border-radius: 20px;
+            }
+            
+            .glossary-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .glossary-item {
+                padding: 25px;
+            }
+            
+            .categories {
+                justify-content: center;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
     </style>
 </head>
-
 <body>
 
-<nav>
+<nav id="navbar">
     <a href="index.html" class="logo">
         <img src="logo.png" alt="Logo Peer-to-Peer">
     </a>
-    <a href="cos-e-p2p.html">Cos'è il P2P</a>
-    <a href="applicazioni.html">Applicazioni</a>
-    <a href="pro-contro.html">Pro e Contro</a>
-    <a href="storia.html">Storia</a>
-    <a href="glossario.html">Glossario</a>
+    <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="cos-e-p2p.html"><i class="fas fa-network-wired"></i> Cos'è il P2P</a>
+        <a href="applicazioni.html"><i class="fas fa-microchip"></i> Applicazioni</a>
+        <a href="pro-contro.html"><i class="fas fa-balance-scale"></i> Pro e Contro</a>
+        <a href="storia.html"><i class="fas fa-history"></i> Storia</a>
+        <a href="glossario.html"><i class="fas fa-book"></i> Glossario</a>
+    </div>
 </nav>
 
-
 <header class="hero">
-    <h1>Glossario Tecnico P2P</h1>
-    <p>Terminologia essenziale per comprendere le reti peer-to-peer e il Web decentralizzato.</p>
+    <div class="hero-content">
+        <h1>Glossario Tecnico P2P</h1>
+        <p>Terminologia essenziale per comprendere le reti peer-to-peer e il Web decentralizzato.</p>
+    </div>
 </header>
 
 <main class="container">
 
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Cerca un termine (es. DHT, Seeder, Churn...)">
+        <input type="text" id="searchInput" placeholder="🔍 Cerca un termine (es. DHT, Seeder, Churn, Blockchain...)">
+        <i class="fas fa-search"></i>
+        <div class="search-info">
+            <span>Termini disponibili: <span class="term-count" id="termCount">8</span></span>
+            <span>Filtra per categoria:</span>
+        </div>
+    </div>
+
+    <div class="categories">
+        <button class="category-btn active" data-category="all">Tutti</button>
+        <button class="category-btn" data-category="base">Concetti Base</button>
+        <button class="category-btn" data-category="protocol">Protocolli</button>
+        <button class="category-btn" data-category="user">Comportamento Utente</button>
+        <button class="category-btn" data-category="infra">Infrastruttura</button>
+        <button class="category-btn" data-category="web3">Web3</button>
     </div>
 
     <dl class="glossary-grid">
 
-        <div class="glossary-item">
-            <dt>🖥️ Peer (Nodo)</dt>
-            <dd>Ogni computer della rete che agisce sia come client che come server, senza gerarchia.</dd>
-            <span class="meta">Concetto Base</span>
+        <div class="glossary-item animate-on-scroll" data-category="base">
+            <dt><i class="fas fa-desktop"></i> Peer (Nodo)</dt>
+            <dd>Ogni computer della rete che agisce sia come client che come server, senza gerarchia. Ogni nodo è contemporaneamente fornitore e consumatore di risorse.</dd>
+            <span class="meta"><i class="fas fa-layer-group"></i> Concetto Base</span>
         </div>
 
-        <div class="glossary-item">
-            <dt>🔍 DHT (Distributed Hash Table)</dt>
-            <dd>Struttura dati distribuita che associa chiavi a valori senza server centrale.</dd>
-            <span class="meta">Protocollo</span>
+        <div class="glossary-item animate-on-scroll" data-category="protocol">
+            <dt><i class="fas fa-search"></i> DHT (Distributed Hash Table)</dt>
+            <dd>Struttura dati distribuita che associa chiavi a valori senza server centrale. Usata in BitTorrent per trovare peer senza tracker centralizzati.</dd>
+            <span class="meta"><i class="fas fa-network-wired"></i> Protocollo</span>
         </div>
 
-        <div class="glossary-item">
-            <dt>🌱 Seeder / Leecher</dt>
-            <dd>Il Seeder condivide il file completo; il Leecher lo sta ancora scaricando.</dd>
-            <span class="meta">Comportamento Utente</span>
+        <div class="glossary-item animate-on-scroll" data-category="user">
+            <dt><i class="fas fa-seedling"></i> Seeder / Leecher</dt>
+            <dd>Il Seeder condivide il file completo; il Leecher lo sta ancora scaricando. Il rapporto Seeder/Leecher determina la velocità di download.</dd>
+            <span class="meta"><i class="fas fa-user-tag"></i> Comportamento Utente</span>
         </div>
 
-        <div class="glossary-item">
-            <dt>📡 Tracker</dt>
-            <dd>Server che aiuta i peer a scoprirsi all'interno di uno swarm.</dd>
-            <span class="meta">Infrastruttura</span>
+        <div class="glossary-item animate-on-scroll" data-category="infra">
+            <dt><i class="fas fa-server"></i> Tracker</dt>
+            <dd>Server che aiuta i peer a scoprirsi all'interno di uno swarm. Mantiene una lista di indirizzi IP dei peer che condividono lo stesso file.</dd>
+            <span class="meta"><i class="fas fa-cogs"></i> Infrastruttura</span>
         </div>
 
-        <div class="glossary-item">
-            <dt>🧲 Magnet Link</dt>
-            <dd>Link basato sull’hash del contenuto invece che sulla sua posizione.</dd>
-            <span class="meta">Standard</span>
+        <div class="glossary-item animate-on-scroll" data-category="protocol">
+            <dt><i class="fas fa-magnet"></i> Magnet Link</dt>
+            <dd>Link basato sull'hash crittografico del contenuto invece che sulla sua posizione. Permette di scaricare file senza file .torrent.</dd>
+            <span class="meta"><i class="fas fa-link"></i> Standard</span>
         </div>
 
-        <div class="glossary-item">
-            <dt>🔄 Churn Rate</dt>
-            <dd>Frequenza con cui i peer entrano ed escono dalla rete.</dd>
-            <span class="meta">Dinamica di Rete</span>
+        <div class="glossary-item animate-on-scroll" data-category="protocol">
+            <dt><i class="fas fa-sync-alt"></i> Churn Rate</dt>
+            <dd>Frequenza con cui i peer entrano ed escono dalla rete. Un alto tasso di churn può ridurre la stabilità e la disponibilità dei file.</dd>
+            <span class="meta"><i class="fas fa-chart-line"></i> Dinamica di Rete</span>
         </div>
 
-        <div class="glossary-item">
-            <dt>🐝 Swarm (Sciame)</dt>
-            <dd>Gruppo di peer che condividono lo stesso file nello stesso momento.</dd>
-            <span class="meta">Organizzazione</span>
+        <div class="glossary-item animate-on-scroll" data-category="base">
+            <dt><i class="fas fa-bee"></i> Swarm (Sciame)</dt>
+            <dd>Gruppo di peer che condividono lo stesso file nello stesso momento. Più grande è lo swarm, più veloce è il download.</dd>
+            <span class="meta"><i class="fas fa-users"></i> Organizzazione</span>
         </div>
 
-        <div class="glossary-item">
-            <dt>🌐 IPFS</dt>
-            <dd>Protocollo P2P per rendere il web distribuito, sicuro e resistente alla censura.</dd>
-            <span class="meta">Web3</span>
+        <div class="glossary-item animate-on-scroll" data-category="web3">
+            <dt><i class="fas fa-globe-americas"></i> IPFS</dt>
+            <dd>Protocollo P2P per rendere il web distribuito, sicuro e resistente alla censura. Sostituisce il modello client-server con un sistema basato sul contenuto.</dd>
+            <span class="meta"><i class="fas fa-cube"></i> Web3</span>
+        </div>
+
+        <div class="glossary-item animate-on-scroll" data-category="protocol">
+            <dt><i class="fas fa-code-branch"></i> Blockchain</dt>
+            <dd>Registro distribuito immutabile che registra transazioni su una rete P2P. Ogni blocco è collegato crittograficamente al precedente.</dd>
+            <span class="meta"><i class="fas fa-link"></i> Protocollo</span>
+        </div>
+
+        <div class="glossary-item animate-on-scroll" data-category="infra">
+            <dt><i class="fas fa-shield-alt"></i> Crittografia End-to-End</dt>
+            <dd>Sistema di sicurezza in cui solo gli utenti comunicanti possono leggere i messaggi. I dati sono criptati sul dispositivo del mittente e decriptati solo su quello del destinatario.</dd>
+            <span class="meta"><i class="fas fa-lock"></i> Sicurezza</span>
+        </div>
+
+        <div class="glossary-item animate-on-scroll" data-category="base">
+            <dt><i class="fas fa-project-diagram"></i> Rete Mesh</dt>
+            <dd>Topologia di rete in cui i nodi si connettono direttamente, dinamicamente e non gerarchicamente a tanti altri nodi possibili.</dd>
+            <span class="meta"><i class="fas fa-sitemap"></i> Topologia</span>
+        </div>
+
+        <div class="glossary-item animate-on-scroll" data-category="web3">
+            <dt><i class="fas fa-file-contract"></i> Smart Contract</dt>
+            <dd>Contratto auto-eseguibile scritto in codice su una blockchain. Si attiva automaticamente quando vengono soddisfatte condizioni prestabilite.</dd>
+            <span class="meta"><i class="fas fa-file-signature"></i> Web3</span>
         </div>
 
     </dl>
@@ -243,21 +721,184 @@ nav a.logo img {
 </main>
 
 <footer>
-    <p>&copy; 2026 Glossario Peer-to-Peer</p>
-	<p>Creato per scopi didattici da Khalid e Stefano.</p>
+    <p>&copy; 2026 Glossario Peer-to-Peer - Dizionario Tecnico Completo</p>
+    <p>Creato per scopi didattici da Khalid e Stefano.</p>
+    <div class="footer-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="cos-e-p2p.html"><i class="fas fa-network-wired"></i> Cos'è il P2P</a>
+        <a href="applicazioni.html"><i class="fas fa-microchip"></i> Applicazioni</a>
+        <a href="pro-contro.html"><i class="fas fa-balance-scale"></i> Pro e Contro</a>
+        <a href="storia.html"><i class="fas fa-history"></i> Storia</a>
+        <a href="glossario.html"><i class="fas fa-book"></i> Glossario</a>
+    </div>
 </footer>
 
+<a href="#" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
 <script>
-    const searchInput = document.getElementById("searchInput");
-    const glossaryItems = document.querySelectorAll(".glossary-item");
-
-    searchInput.addEventListener("keyup", () => {
-        const query = searchInput.value.toLowerCase();
-
-        glossaryItems.forEach(item => {
-            const text = item.innerText.toLowerCase();
-            item.style.display = text.includes(query) ? "block" : "none";
+    // Animazioni al caricamento della pagina
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animazione navbar al scroll
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+            
+            // Mostra/nascondi pulsante "torna su"
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
         });
+        
+        // Funzione per controllare se un elemento è visibile
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 &&
+                rect.bottom >= 0
+            );
+        }
+        
+        // Funzione per attivare le animazioni quando gli elementi entrano in viewport
+        function animateOnScroll() {
+            const glossaryItems = document.querySelectorAll('.glossary-item');
+            
+            glossaryItems.forEach((item, index) => {
+                if (isElementInViewport(item)) {
+                    setTimeout(() => {
+                        item.classList.add('animate');
+                    }, index * 100);
+                }
+            });
+        }
+        
+        // Esegui all'inizio e durante lo scroll
+        animateOnScroll();
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Ricerca nel glossario
+        const searchInput = document.getElementById("searchInput");
+        const glossaryItems = document.querySelectorAll(".glossary-item");
+        const termCount = document.getElementById("termCount");
+        
+        function updateTermCount() {
+            const visibleItems = document.querySelectorAll('.glossary-item:not([style*="display: none"])');
+            termCount.textContent = visibleItems.length;
+        }
+        
+        searchInput.addEventListener("keyup", () => {
+            const query = searchInput.value.toLowerCase();
+            
+            glossaryItems.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = "block";
+                    // Aggiungi effetto highlight
+                    if (query.length > 2) {
+                        item.style.animation = "highlightPulse 0.5s ease";
+                        setTimeout(() => {
+                            item.style.animation = "";
+                        }, 500);
+                    }
+                } else {
+                    item.style.display = "none";
+                }
+            });
+            
+            updateTermCount();
+        });
+        
+        // Filtro per categorie
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Rimuovi classe active da tutti i bottoni
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Aggiungi classe active al bottone cliccato
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                glossaryItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    
+                    if (category === 'all' || itemCategory === category) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+                
+                updateTermCount();
+            });
+        });
+        
+        // Effetti hover per gli elementi del glossario
+        glossaryItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Effetto di digitazione per il titolo hero (opzionale)
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                heroTitle.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        // Avvia l'effetto di digitazione dopo un breve ritardo
+        setTimeout(typeWriter, 500);
+        
+        // Pulsante "torna su"
+        backToTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Aggiungi classe animate-on-scroll a tutti gli elementi che devono essere animati
+        const animateElements = document.querySelectorAll('.glossary-item');
+        animateElements.forEach(el => {
+            el.classList.add('animate-on-scroll');
+        });
+        
+        // Animazione per l'effetto highlight
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes highlightPulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.02); box-shadow: 0 15px 35px rgba(46, 204, 113, 0.4); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Inizializza il conteggio dei termini
+        updateTermCount();
     });
 </script>
 
