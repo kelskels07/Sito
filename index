@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer-to-Peer | Home</title>
+
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --dark-bg: #2c3e50;
+            --light-bg: #f8f9fa;
+            --text-dark: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* link allineati a sinistra */
+            background: #333;
+            padding: 0.5rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Logo nella nav */
+        nav a.logo {
+            margin-right: 40px; /* spazio tra logo e link */
+        }
+
+        nav a.logo img {
+            height: 60px; /* altezza del logo */
+            width: auto;
+            vertical-align: middle;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50, #000);
+            color: white;
+            text-align: center;
+            padding: 90px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 20px auto 0;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1000px;
+            margin: -50px auto 60px;
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        /* INTRO */
+        .intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* FEATURES */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary-green);
+        }
+
+        .feature-card span {
+            font-size: 2.5rem;
+        }
+
+        /* SECTIONS */
+        .section {
+            margin-top: 80px;
+        }
+
+        .section h2 {
+            border-left: 6px solid var(--primary-green);
+            padding-left: 15px;
+            color: var(--dark-bg);
+            margin-bottom: 15px;
+        }
+
+        .section p {
+            font-size: 1.05rem;
+            color: #555;
+        }
+
+        .section a {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-green);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .section a:hover {
+            text-decoration: underline;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .cta a {
+            background: var(--primary-green);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+            transition: 0.3s;
+        }
+
+        .cta a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(76,175,80,0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                margin-top: 0;
+                border-radius: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                margin: 5px 10px;
+            }
+
+            nav a.logo {
+                margin-right: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html" class="logo">
+        <img src="logo.png" alt="Logo Peer-to-Peer">
+    </a>
+    <a href="cos-e-p2p.html">Cos'è il P2P</a>
+    <a href="applicazioni.html">Applicazioni</a>
+    <a href="pro-contro.html">Pro e Contro</a>
+    <a href="storia.html">Storia</a>
+    <a href="glossario.html">Glossario</a>
+</nav>
+
+<header class="hero">
+    <h1>Peer-to-Peer World</h1>
+    <p>L’architettura decentralizzata che ha rivoluzionato Internet</p>
+</header>
+
+<main class="container">
+
+    <div class="intro">
+        <h2>La potenza della collaborazione diretta</h2>
+        <p>
+            Nel Peer-to-Peer ogni nodo è protagonista: nessun server centrale,
+            nessun controllo unico, solo cooperazione distribuita.
+        </p>
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <span>🌐</span>
+            <h3>Decentralizzato</h3>
+            <p>Nessun punto centrale di controllo o fallimento.</p>
+        </div>
+        <div class="feature-card">
+            <span>⚡</span>
+            <h3>Scalabile</h3>
+            <p>Più utenti partecipano, più la rete diventa forte.</p>
+        </div>
+        <div class="feature-card">
+            <span>🛡️</span>
+            <h3>Resiliente</h3>
+            <p>La rete sopravvive anche alla perdita di nodi.</p>
+        </div>
+    </div>
+
+    <section class="section">
+        <h2>Cos’è il Peer-to-Peer</h2>
+        <p>
+            Il P2P è un’architettura di rete in cui tutti i nodi hanno pari ruolo.
+            Ogni computer è sia client che server.
+        </p>
+        <a href="cos-e-p2p.html">Approfondisci →</a>
+    </section>
+
+    <section class="section">
+        <h2>Applicazioni del P2P</h2>
+        <p>
+            File sharing, blockchain, streaming, Web3 e ricerca scientifica
+            sfruttano il modello P2P per efficienza e resilienza.
+        </p>
+        <a href="applicazioni.html">Scopri le applicazioni →</a>
+    </section>
+
+    <section class="section">
+        <h2>Pro e Contro</h2>
+        <p>
+            Libertà, scalabilità e resistenza alla censura contro
+            sicurezza, consumo di risorse e complessità tecnica.
+        </p>
+        <a href="pro-contro.html">Analisi completa →</a>
+    </section>
+
+    <section class="section">
+        <h2>Storia del P2P</h2>
+        <p>
+            Da Napster a BitTorrent fino alle criptovalute:
+            l’evoluzione della decentralizzazione.
+        </p>
+        <a href="storia.html">Vai alla storia →</a>
+    </section>
+
+    <section class="section">
+        <h2>Glossario Tecnico</h2>
+        <p>
+            Tutti i termini fondamentali per comprendere davvero
+            le reti peer-to-peer e il Web decentralizzato.
+        </p>
+        <a href="glossario.html">Consulta il glossario →</a>
+    </section>
+
+    <div class="cta">
+        <a href="cos-e-p2p.html">Inizia il viaggio nel P2P →</a>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Progetto Didattico Peer-to-Peer</p>
+    <p>Creato per scopi didattici da Khalid e Stefano.</p>
+</footer>
+
+</body>
+</html>
