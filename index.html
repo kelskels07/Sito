@@ -4,17 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peer-to-Peer | Home</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-green: #4CAF50;
-            --dark-bg: #2c3e50;
-            --light-bg: #f8f9fa;
-            --text-dark: #333;
+            --primary-green-dark: #3e8e41;
+            --primary-gradient: linear-gradient(135deg, #4CAF50, #2E7D32);
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-green: 0 10px 30px rgba(76, 175, 80, 0.3);
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         html {
@@ -22,193 +32,579 @@
         }
 
         body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', 'Inter', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--light-bg);
             color: var(--text-dark);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        /* NAV */
+        /* NAVIGATION - Modernizzata */
         nav {
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* link allineati a sinistra */
-            background: #333;
-            padding: 0.5rem 1rem;
+            justify-content: space-between;
+            background: rgba(15, 23, 42, 0.95);
+            padding: 1rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            padding: 0.8rem 2rem;
+            background: rgba(15, 23, 42, 0.98);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
         }
 
         nav a {
-            color: #fff;
+            color: #e2e8f0;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 0.85rem;
+            margin: 0 16px;
+            font-size: 0.9rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--primary-green);
+            color: #ffffff;
         }
 
-        /* Logo nella nav */
-        nav a.logo {
-            margin-right: 40px; /* spazio tra logo e link */
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
 
-        nav a.logo img {
-            height: 60px; /* altezza del logo */
-            width: auto;
-            vertical-align: middle;
+        nav a:hover::after {
+            width: 100%;
         }
 
-        /* HERO */
+        .logo {
+            margin-right: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        /* HERO SECTION - Migliorata */
         .hero {
-            background: linear-gradient(135deg, #2c3e50, #000);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             color: white;
             text-align: center;
-            padding: 90px 20px;
+            padding: 140px 20px 160px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(46, 125, 50, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin: 0;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
         }
 
         .hero p {
             max-width: 650px;
-            margin: 20px auto 0;
-            font-size: 1.2rem;
-            opacity: 0.9;
+            margin: 25px auto 0;
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            font-weight: 300;
         }
 
         /* CONTAINER */
         .container {
-            max-width: 1000px;
-            margin: -50px auto 60px;
-            background: white;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin: -100px auto 100px;
+            background: var(--card-bg);
+            padding: 70px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 2;
+            animation: containerAppear 1s ease-out 0.5s both;
+        }
+
+        @keyframes containerAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* INTRO */
         .intro {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 80px;
+            position: relative;
         }
 
-        /* FEATURES */
+        .intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .intro p {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* FEATURES - Migliorata con animazioni */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 90px;
         }
 
         .feature-card {
-            padding: 30px;
-            background: #fdfdfd;
-            border: 1px solid #eee;
-            border-radius: 10px;
+            padding: 40px 30px;
+            background: var(--card-bg);
+            border-radius: 18px;
             text-align: center;
-            transition: 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-md);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .feature-card.animate {
+            animation: cardAppear 0.6s ease-out forwards;
+        }
+
+        .feature-card:nth-child(1).animate {
+            animation-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2).animate {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3).animate {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .feature-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--primary-green);
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .feature-card span {
-            font-size: 2.5rem;
+        .feature-icon {
+            font-size: 3.5rem;
+            display: block;
+            margin-bottom: 20px;
+            transition: transform 0.5s ease;
         }
 
-        /* SECTIONS */
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        /* SECTIONS - Migliorate */
         .section {
-            margin-top: 80px;
+            margin-top: 90px;
+            padding: 40px;
+            border-radius: 18px;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section.animate {
+            animation: sectionAppear 0.6s ease-out forwards;
+        }
+
+        .section:nth-child(1).animate {
+            animation-delay: 0.1s;
+        }
+
+        .section:nth-child(2).animate {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-child(3).animate {
+            animation-delay: 0.3s;
+        }
+
+        .section:nth-child(4).animate {
+            animation-delay: 0.4s;
+        }
+
+        .section:nth-child(5).animate {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes sectionAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:hover {
+            background: #ffffff;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
         }
 
         .section h2 {
-            border-left: 6px solid var(--primary-green);
-            padding-left: 15px;
-            color: var(--dark-bg);
+            font-size: 1.9rem;
             margin-bottom: 15px;
+            position: relative;
+            padding-left: 0px;
+            display: flex;
+            align-items: center;
+			 gap: 20px;
+        }
+
+        .section h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 24px;
+            width: 6px;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+        }
+
+        .section h2 i {
+            margin-left: 10px;
+            font-size: 1.5rem;
+            color: var(--primary-green);
         }
 
         .section p {
-            font-size: 1.05rem;
-            color: #555;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
         }
 
         .section a {
-            display: inline-block;
-            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 10px;
             color: var(--primary-green);
             font-weight: bold;
             text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .section a i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
         }
 
         .section a:hover {
-            text-decoration: underline;
+            background: rgba(76, 175, 80, 0.2);
+            transform: translateX(5px);
+            color: var(--primary-green-dark);
         }
 
-        /* CTA */
+        .section a:hover i {
+            transform: translateX(5px);
+        }
+
+        /* CTA - Migliorata */
         .cta {
             text-align: center;
-            margin-top: 70px;
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+            padding: 60px 40px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
         }
 
-        .cta a {
-            background: var(--primary-green);
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
+            animation: pulse 8s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(30px, 30px) scale(1.1);
+            }
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-gradient);
             color: white;
-            padding: 18px 45px;
+            padding: 22px 60px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(76,175,80,0.3);
-            transition: 0.3s;
+            box-shadow: var(--shadow-green);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
-        .cta a:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(76,175,80,0.4);
+        .cta-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
         }
 
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(76, 175, 80, 0.5);
+        }
+
+        .cta-button:hover::after {
+            left: 100%;
+        }
+
+        /* FOOTER - Migliorato */
         footer {
             text-align: center;
-            padding: 40px 20px;
-            color: #888;
-            font-size: 0.9rem;
+            padding: 70px 20px 50px;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            background: var(--dark-bg);
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #334155, transparent);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .container {
+                padding: 50px;
+                margin: -80px 20px 80px;
+            }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 30px;
-                margin-top: 0;
-                border-radius: 0;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
             nav {
-                flex-wrap: wrap;
+                flex-direction: column;
+                padding: 1rem;
             }
-
+            
+            .nav-left {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
             nav a {
                 margin: 5px 10px;
+                font-size: 0.85rem;
             }
-
-            nav a.logo {
-                margin-right: 20px;
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 30px;
+                margin: -50px 15px 50px;
+                border-radius: 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .section {
+                padding: 30px;
+            }
+            
+            .cta {
+                padding: 40px 20px;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
             }
         }
     </style>
@@ -216,20 +612,26 @@
 
 <body>
 
-<nav>
-    <a href="index.html" class="logo">
-        <img src="logo.png" alt="Logo Peer-to-Peer">
-    </a>
-    <a href="cos-e-p2p.html">Cos'è il P2P</a>
-    <a href="applicazioni.html">Applicazioni</a>
-    <a href="pro-contro.html">Pro e Contro</a>
-    <a href="storia.html">Storia</a>
-    <a href="glossario.html">Glossario</a>
+<nav id="navbar">
+    <div class="nav-left">
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Logo Peer-to-Peer">
+        </a>
+        <div class="nav-links">
+            <a href="cos-e-p2p.html"><i class="fas fa-network-wired"></i> Cos'è il P2P</a>
+            <a href="applicazioni.html"><i class="fas fa-microchip"></i> Applicazioni</a>
+            <a href="pro-contro.html"><i class="fas fa-balance-scale"></i> Pro e Contro</a>
+            <a href="storia.html"><i class="fas fa-history"></i> Storia</a>
+            <a href="glossario.html"><i class="fas fa-book"></i> Glossario</a>
+        </div>
+    </div>
 </nav>
 
 <header class="hero">
-    <h1>Peer-to-Peer World</h1>
-    <p>L’architettura decentralizzata che ha rivoluzionato Internet</p>
+    <div class="hero-content">
+        <h1>Peer-to-Peer</h1>
+        <p>L’architettura decentralizzata che ha rivoluzionato Internet</p>
+    </div>
 </header>
 
 <main class="container">
@@ -244,69 +646,74 @@
 
     <div class="features">
         <div class="feature-card">
-            <span>🌐</span>
+            <div class="feature-icon">🌐</div>
             <h3>Decentralizzato</h3>
             <p>Nessun punto centrale di controllo o fallimento.</p>
         </div>
         <div class="feature-card">
-            <span>⚡</span>
+            <div class="feature-icon">⚡</div>
             <h3>Scalabile</h3>
             <p>Più utenti partecipano, più la rete diventa forte.</p>
         </div>
         <div class="feature-card">
-            <span>🛡️</span>
+            <div class="feature-icon">🛡️</div>
             <h3>Resiliente</h3>
             <p>La rete sopravvive anche alla perdita di nodi.</p>
         </div>
     </div>
 
     <section class="section">
-        <h2>Cos’è il Peer-to-Peer</h2>
+        <h2><i class="fas fa-question-circle"></i> Cos’è il Peer-to-Peer</h2>
         <p>
             Il P2P è un’architettura di rete in cui tutti i nodi hanno pari ruolo.
-            Ogni computer è sia client che server.
+            Ogni computer è sia client che server, creando un sistema distribuito
+            senza autorità centrale.
         </p>
-        <a href="cos-e-p2p.html">Approfondisci →</a>
+        <a href="cos-e-p2p.html">Approfondisci <i class="fas fa-arrow-right"></i></a>
     </section>
 
     <section class="section">
-        <h2>Applicazioni del P2P</h2>
+        <h2><i class="fas fa-rocket"></i>Applicazioni del P2P</h2>
         <p>
             File sharing, blockchain, streaming, Web3 e ricerca scientifica
-            sfruttano il modello P2P per efficienza e resilienza.
+            sfruttano il modello P2P per massimizzare efficienza e resilienza.
         </p>
-        <a href="applicazioni.html">Scopri le applicazioni →</a>
+        <a href="applicazioni.html">Scopri le applicazioni <i class="fas fa-arrow-right"></i></a>
     </section>
 
     <section class="section">
-        <h2>Pro e Contro</h2>
+        <h2><i class="fas fa-chart-line"></i> Pro e Contro</h2>
         <p>
             Libertà, scalabilità e resistenza alla censura contro
             sicurezza, consumo di risorse e complessità tecnica.
         </p>
-        <a href="pro-contro.html">Analisi completa →</a>
+        <a href="pro-contro.html">Analisi completa <i class="fas fa-arrow-right"></i></a>
     </section>
 
     <section class="section">
-        <h2>Storia del P2P</h2>
+        <h2><i class="fas fa-landmark"></i> Storia del P2P</h2>
         <p>
             Da Napster a BitTorrent fino alle criptovalute:
-            l’evoluzione della decentralizzazione.
+            l’evoluzione della decentralizzazione attraverso le epoche digitali.
         </p>
-        <a href="storia.html">Vai alla storia →</a>
+        <a href="storia.html">Vai alla storia <i class="fas fa-arrow-right"></i></a>
     </section>
 
     <section class="section">
-        <h2>Glossario Tecnico</h2>
+        <h2><i class="fas fa-book-open"></i> Glossario Tecnico</h2>
         <p>
             Tutti i termini fondamentali per comprendere davvero
             le reti peer-to-peer e il Web decentralizzato.
         </p>
-        <a href="glossario.html">Consulta il glossario →</a>
+        <a href="glossario.html">Consulta il glossario <i class="fas fa-arrow-right"></i></a>
     </section>
 
     <div class="cta">
-        <a href="cos-e-p2p.html">Inizia il viaggio nel P2P →</a>
+        <div class="cta-content">
+            <h2>Pronto a esplorare il mondo P2P?</h2>
+            <p>Scopri come le reti decentralizzate stanno cambiando il futuro di Internet e della tecnologia.</p>
+            <a href="cos-e-p2p.html" class="cta-button">Inizia il viaggio nel P2P <i class="fas fa-arrow-right"></i></a>
+        </div>
     </div>
 
 </main>
@@ -314,7 +721,90 @@
 <footer>
     <p>&copy; 2026 Progetto Didattico Peer-to-Peer</p>
     <p>Creato per scopi didattici da Khalid e Stefano.</p>
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="cos-e-p2p.html">Cos'è il P2P</a>
+        <a href="applicazioni.html">Applicazioni</a>
+        <a href="pro-contro.html">Pro e Contro</a>
+        <a href="storia.html">Storia</a>
+        <a href="glossario.html">Glossario</a>
+    </div>
 </footer>
+
+<script>
+    // Animazioni al caricamento della pagina
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animazione navbar al scroll
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+        
+        // Animazione delle feature cards
+        const featureCards = document.querySelectorAll('.feature-card');
+        const sections = document.querySelectorAll('.section');
+        
+        // Funzione per controllare se un elemento è visibile
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9 &&
+                rect.bottom >= 0
+            );
+        }
+        
+        // Funzione per attivare le animazioni quando gli elementi entrano in viewport
+        function animateOnScroll() {
+            featureCards.forEach(card => {
+                if (isElementInViewport(card)) {
+                    card.classList.add('animate');
+                }
+            });
+            
+            sections.forEach(section => {
+                if (isElementInViewport(section)) {
+                    section.classList.add('animate');
+                }
+            });
+        }
+        
+        // Esegui all'inizio e durante lo scroll
+        animateOnScroll();
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Animazione pulsante CTA
+        const ctaButton = document.querySelector('.cta-button');
+        ctaButton.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px) scale(1.05)';
+        });
+        
+        ctaButton.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+        
+        // Effetto di digitazione per il titolo hero (opzionale)
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                heroTitle.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        // Avvia l'effetto di digitazione dopo un breve ritardo
+        setTimeout(typeWriter, 500);
+    });
+</script>
 
 </body>
 </html>
