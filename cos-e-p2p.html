@@ -239,7 +239,7 @@
             font-size: 2.2rem;
             display: flex;
             align-items: center;
-			gap: 20px;
+            gap: 20px;
         }
 
         h2::before {
@@ -442,54 +442,204 @@
             margin-bottom: 8px;
         }
 
-        /* Immagine con effetto */
-        .image-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            border-radius: 16px;
-            background: var(--card-bg);
-            box-shadow: var(--shadow-md);
-            transition: all 0.4s ease;
+        /* IMMAGINI AFFIANCATE - CONFRONTO P2P vs CLIENT-SERVER */
+        .comparison-images-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 50px 0;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
         }
 
-        .image-container.animate {
-            animation: imageAppear 0.8s ease-out forwards;
+        .comparison-images-grid.animate {
+            animation: gridAppear 0.8s ease-out forwards;
+            animation-delay: 0.3s;
         }
 
-        @keyframes imageAppear {
+        @keyframes gridAppear {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .image-container:hover {
-            transform: translateY(-10px);
+        .image-comparison-card {
+            padding: 25px;
+            border-radius: 18px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-comparison-card:hover {
+            transform: translateY(-15px);
             box-shadow: var(--shadow-lg);
         }
 
-        .image-container img {
-            width: 100%;
-            height: auto;
+        .image-comparison-card.client-server {
+            border-color: #e74c3c;
+        }
+
+        .image-comparison-card.client-server:hover {
+            border-color: #c0392b;
+        }
+
+        .image-comparison-card.p2p {
+            border-color: var(--primary-green);
+        }
+
+        .image-comparison-card.p2p:hover {
+            border-color: var(--secondary-green);
+        }
+
+        .image-comparison-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .image-comparison-card.client-server::before {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .image-comparison-card.p2p::before {
+            background: var(--primary-gradient);
+        }
+
+        .image-comparison-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .image-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .image-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .image-title.client-server {
+            color: #e74c3c;
+        }
+
+        .image-title.p2p {
+            color: var(--secondary-green);
+        }
+
+        .image-icon {
+            width: 50px;
+            height: 50px;
             border-radius: 12px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .client-server .image-icon {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+        }
+
+        .p2p .image-icon {
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--primary-green);
+        }
+
+        .comparison-image {
+            width: 100%;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
             transition: transform 0.5s ease;
         }
 
-        .image-container:hover img {
-            transform: scale(1.02);
+        .image-comparison-card:hover .comparison-image {
+            transform: scale(1.03);
         }
 
-        .image-caption {
-            text-align: center;
-            font-style: italic;
+        .comparison-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .image-comparison-card:hover .comparison-image img {
+            transform: scale(1.05);
+        }
+
+        .image-description {
             color: var(--text-light);
-            margin-top: 15px;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            padding: 15px;
+            background: rgba(241, 245, 249, 0.5);
+            border-radius: 10px;
+            border-left: 4px solid;
+            flex-grow: 1;
+        }
+
+        .client-server .image-description {
+            border-left-color: #e74c3c;
+        }
+
+        .p2p .image-description {
+            border-left-color: var(--primary-green);
+        }
+
+        .comparison-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .vs-badge {
+            background: var(--dark-blue);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 2;
+            box-shadow: var(--shadow-md);
+        }
+
+        .comparison-divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e74c3c, var(--primary-green));
+            z-index: 1;
         }
 
         /* Lista standard migliorata */
@@ -605,6 +755,15 @@
                 padding: 50px; 
                 margin: -40px 20px 40px; 
             }
+            
+            .comparison-images-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .comparison-divider {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
@@ -653,6 +812,14 @@
                 font-size: 1.8rem;
             }
             
+            .comparison-image {
+                height: 200px;
+            }
+            
+            .image-title {
+                font-size: 1.4rem;
+            }
+            
             .footer-links {
                 flex-direction: column;
                 gap: 15px;
@@ -695,9 +862,52 @@
         </p>
     </section>
 
-    <div class="image-container animate-on-scroll">
-        <img src="p2p.png" alt="Diagramma: Architettura a maglia P2P vs Architettura a stella Client-Server">
-        <div class="image-caption">Diagramma comparativo: Architettura a maglia P2P vs Architettura a stella Client-Server</div>
+    <!-- CONFRONTO VISIVO AFFIANCATO: CLIENT-SERVER vs P2P -->
+    <div class="comparison-images-grid animate-on-scroll">
+        <!-- Card Client-Server -->
+        <div class="image-comparison-card client-server">
+            <div class="image-header">
+                <h3 class="image-title client-server">
+                    <div class="image-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    Client-Server
+                </h3>
+            </div>
+            
+            <div class="comparison-image">
+                <img src="client_server.png" alt="Architettura Client-Server">
+            </div>
+            
+            <div class="image-description">
+                <p><strong>Architettura Centralizzata</strong> - Tutti i client si connettono a un server centrale che gestisce tutte le richieste e le risposte. Il server è il punto unico di controllo e distribuzione dei dati.</p>
+            </div>
+        </div>
+
+        <!-- Divider VS -->
+        <div class="comparison-divider">
+            <div class="vs-badge">VS</div>
+        </div>
+
+        <!-- Card P2P -->
+        <div class="image-comparison-card p2p">
+            <div class="image-header">
+                <h3 class="image-title p2p">
+                    <div class="image-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    Peer-to-Peer
+                </h3>
+            </div>
+            
+            <div class="comparison-image">
+                <img src="p2p.png" alt="Architettura Peer-to-Peer">
+            </div>
+            
+            <div class="image-description">
+                <p><strong>Architettura Decentralizzata</strong> - Tutti i nodi comunicano direttamente tra loro senza server centrale. Ogni nodo funge sia da client che da server, condividendo risorse direttamente.</p>
+            </div>
+        </div>
     </div>
 
     <section class="animate-on-scroll">
@@ -813,7 +1023,7 @@
             const sections = document.querySelectorAll('section');
             const compCards = document.querySelectorAll('.comp-card');
             const listItems = document.querySelectorAll('.features-list li');
-            const imageContainer = document.querySelector('.image-container');
+            const comparisonGrid = document.querySelector('.comparison-images-grid');
             
             elements.forEach(element => {
                 if (isElementInViewport(element)) {
@@ -839,8 +1049,8 @@
                 }
             });
             
-            if (imageContainer && isElementInViewport(imageContainer)) {
-                imageContainer.classList.add('animate');
+            if (comparisonGrid && isElementInViewport(comparisonGrid)) {
+                comparisonGrid.classList.add('animate');
             }
         }
         
@@ -848,7 +1058,19 @@
         animateOnScroll();
         window.addEventListener('scroll', animateOnScroll);
         
-        // Effetti hover per le card di confronto
+        // Effetti hover per le card di confronto immagini
+        const imageComparisonCards = document.querySelectorAll('.image-comparison-card');
+        imageComparisonCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Effetti hover per le card di confronto testuali
         const compCards = document.querySelectorAll('.comp-card');
         compCards.forEach(card => {
             card.addEventListener('mouseenter', function() {
@@ -868,18 +1090,6 @@
             });
             
             highlightBox.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        }
-        
-        // Effetto per l'immagine
-        const imageContainer = document.querySelector('.image-container');
-        if (imageContainer) {
-            imageContainer.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px)';
-            });
-            
-            imageContainer.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0)';
             });
         }
@@ -908,6 +1118,12 @@
                 top: 0,
                 behavior: 'smooth'
             });
+        });
+        
+        // Aggiungi classe animate-on-scroll agli elementi che devono essere animati
+        const animateElements = document.querySelectorAll('.comparison-images-grid, section, .comp-card, .features-list li');
+        animateElements.forEach(el => {
+            el.classList.add('animate-on-scroll');
         });
     });
 </script>
