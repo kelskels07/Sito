@@ -40,7 +40,7 @@ In conclusione, l’architettura Client–Server è semplice, centralizzata e ad
 
 SITOGRAFIA
 
-[- WIKIPEDIA.org]([url](https://it.wikipedia.org/wiki/Peer-to-peer))
+[- WIKIPEDIA.org]([[url])
 [- ACADEMY.YOUNGPLATFORM]([url](https://academy.youngplatform.com/blockchain/peer-to-peer-p2p-client-server-cosa-sono-come-funzionano/))
 [- FASTWEB.it]([url](https://www.fastweb.it/fastweb-plus/digital-magazine/cosa-e-come-funziona-p2p/))
 [-POINTBITCOIN.it]([url](https://checkpointbitcoin.it/rete-peer-to-peer-bitcoin/))
